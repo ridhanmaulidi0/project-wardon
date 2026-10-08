@@ -74,7 +74,7 @@ jobs:
         run: flutter pub get
 
       - name: Kompilasi Android Release APK
-        run: flutter build apk --release
+        run: flutter build apk --release --android-skip-build-dependency-validation
 
       - name: Siapkan berkas APK
         run: cp build/app/outputs/flutter-apk/app-release.apk wardon-android-release.apk
