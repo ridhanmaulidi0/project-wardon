@@ -1,0 +1,188 @@
+name: Manual Multiplatform Build & Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_android:
+        description: 'Build Android APK'
+        type: boolean
+        default: true
+      build_ios:
+        description: 'Build iOS App (.zip)'
+        type: boolean
+        default: true
+      build_windows:
+        description: 'Build Windows Desktop (.zip)'
+        type: boolean
+        default: true
+      release_tag:
+        description: 'Tag versi rilis (kosongkan untuk penomoran otomatis)'
+        type: string
+        default: 'v1.0.0'
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    name: Validasi Input & Konfigurasi
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+    steps:
+      - name: Periksa pilihan platform
+        run: |
+          if [ "${{ inputs.build_android }}" != "true" ] && [ "${{ inputs.build_ios }}" != "true" ] && [ "${{ inputs.build_windows }}" != "true" ]; then
+            echo "::error::Tidak ada platform yang dipilih! Harap centang minimal satu platform (Android, iOS, atau Windows)."
+            exit 1
+          fi
+
+      - name: Tentukan tag rilis
+        id: tag
+        run: |
+          RAW_TAG="${{ inputs.release_tag }}"
+          if [ -z "$RAW_TAG" ]; then
+            RESOLVED_TAG="v1.0.0-build.${{ github.run_number }}"
+          else
+            RESOLVED_TAG="$RAW_TAG"
+          fi
+          echo "tag=$RESOLVED_TAG" >> "$GITHUB_OUTPUT"
+
+  build_android:
+    name: Build Android APK
+    needs: validate
+    if: inputs.build_android
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repositori
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Unduh dependensi
+        run: flutter pub get
+
+      - name: Kompilasi Android Release APK
+        run: flutter build apk --release
+
+      - name: Siapkan berkas APK
+        run: cp build/app/outputs/flutter-apk/app-release.apk wardon-android-release.apk
+
+      - name: Unggah artifact Android
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-build
+          path: wardon-android-release.apk
+          retention-days: 30
+
+  build_ios:
+    name: Build iOS App (.zip)
+    needs: validate
+    if: inputs.build_ios
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repositori
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Unduh dependensi
+        run: flutter pub get
+
+      - name: Kompilasi iOS (No Code Sign)
+        run: flutter build ios --release --no-codesign
+
+      - name: Arsipkan Runner.app ke format zip
+        run: |
+          cd build/ios/iphoneos
+          zip -r ../../../wardon-ios-release.zip Runner.app
+
+      - name: Unggah artifact iOS
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-build
+          path: wardon-ios-release.zip
+          retention-days: 30
+
+  build_windows:
+    name: Build Windows Desktop (.zip)
+    needs: validate
+    if: inputs.build_windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repositori
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Aktifkan dukungan desktop Windows
+        run: flutter config --enable-windows-desktop
+
+      - name: Unduh dependensi
+        run: flutter pub get
+
+      - name: Kompilasi Windows Release
+        run: flutter build windows --release
+
+      - name: Arsipkan bundel rilis Windows
+        shell: pwsh
+        run: |
+          Compress-Archive -Path build\windows\x64\runner\Release\* -DestinationPath wardon-windows-release.zip
+
+      - name: Unggah artifact Windows
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-build
+          path: wardon-windows-release.zip
+          retention-days: 30
+
+  create_release:
+    name: Terbitkan GitHub Release
+    needs: [validate, build_android, build_ios, build_windows]
+    if: always() && needs.validate.result == 'success' && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repositori
+        uses: actions/checkout@v4
+
+      - name: Unduh seluruh artifact kompilasi
+        uses: actions/download-artifact@v4
+        with:
+          path: downloaded_artifacts
+
+      - name: Satukan seluruh berkas rilis
+        run: |
+          mkdir -p release_assets
+          find downloaded_artifacts -type f \( -name "*.apk" -o -name "*.zip" \) -exec cp {} release_assets/ \;
+          ls -lh release_assets/
+
+      - name: Buat dan terbitkan GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.validate.outputs.tag }}
+          name: Release ${{ needs.validate.outputs.tag }}
+          draft: false
+          prerelease: false
+          files: release_assets/*
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
