@@ -117,12 +117,9 @@ Sistem menerapkan Role-Based Access Control (RBAC) dengan dua tingkatan peran:
 
 1. Administrator (Owner)
    - Akses penuh ke seluruh modul sistem: Kasir, Dashboard, Riwayat Transaksi, Manajemen Menu & Stok, Laporan & Ekspor Excel, serta Pengaturan Toko.
+   
 2. Kasir
    - Akses operasional harian: Modul Transaksi Kasir, Dashboard Ringkasan, dan Riwayat Transaksi. Akses ke menu stok dan laporan eksekutif dibatasi demi keamanan operasional.
-
-Akun pengujian bawaan yang tersedia pada sistem:
-- Administrator: admin@wardon.com
-- Kasir: kasir@wardon.com
 
 ---
 
