@@ -1,164 +1,219 @@
-# WARDON POS - Point of Sale System
+<div align="center">
 
-Sistem Point of Sale (POS) dan manajemen operasional terintegrasi untuk bisnis makanan dan minuman (F&B), warung kopi, dan eatery. Dibangun menggunakan kerangka kerja Flutter dan arsitektur State Management berbasis Riverpod, aplikasi ini dirancang untuk memberikan kinerja tinggi, responsivitas lintas platform, dan kemudahan operasional kasir harian.
+# ☕ WARDON POS
 
----
+**Sistem Point of Sale & Manajemen Operasional Terintegrasi untuk Bisnis F&B**
 
-## Daftar Isi
+Solusi kasir modern untuk warung kopi, kafe, dan eatery - cepat, responsif, dan mudah digunakan di semua perangkat.
 
-1. [Gambaran Umum](#gambaran-umum)
-2. [Fitur Utama](#fitur-utama)
-3. [Arsitektur dan Struktur Proyek](#arsitektur-dan-struktur-proyek)
-4. [Teknologi dan Dependensi](#teknologi-dan-dependensi)
-5. [Hak Akses Pengguna](#hak-akses-pengguna)
-6. [Panduan Instalasi dan Menjalankan Aplikasi](#panduan-instalasi-dan-menjalankan-aplikasi)
-7. [Lisensi dan Kontribusi](#lisensi-dan-kontribusi)
+[![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-%5E3.9.2-0175C2?logo=dart&logoColor=white)](https://dart.dev)
+[![Riverpod](https://img.shields.io/badge/State-Riverpod%203-00B8D4)](https://riverpod.dev)
+[![Material 3](https://img.shields.io/badge/UI-Material%203-6750A4?logo=materialdesign&logoColor=white)](https://m3.material.io)
+[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web%20%7C%20Desktop-success)](#-panduan-instalasi)
+[![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-lightgrey)](#-lisensi)
 
----
-
-## Gambaran Umum
-
-WARDON POS menghadirkan solusi digital menyeluruh bagi pemilik usaha dan staf kasir. Sistem ini mengintegrasikan pemrosesan transaksi cepat, pelacakan inventaris stok menu, visualisasi metrik performa penjualan, kustomisasi profil toko dan struk belanja, serta pembuatan laporan pembukuan otomatis dalam format spreadsheet (Microsoft Excel).
+</div>
 
 ---
 
-## Fitur Utama
+## 📑 Daftar Isi
 
-### 1. Transaksi Kasir (Point of Sale)
-- Antarmuka penjualan responsif yang dioptimalkan untuk perangkat mobile, tablet, maupun desktop.
-- Katalog menu berbasis kategori (Kopi, Non-Kopi, Makanan, Camilan) disertai pencarian instan.
-- Panel keranjang belanja dinamis dengan dukungan penambahan catatan khusus per item pesanan.
-- Dukungan berbagai metode pembayaran:
-  - Tunai (disertai kalkulasi otomatis uang yang diterima dan nilai kembalian).
-  - QRIS.
-  - Pembayaran Digital / Transfer.
-- Integrasi penghitungan diskon dan pajak pertambahan nilai (PPN).
-- Pembuatan dan pratinjau struk digital dengan format teks rapi yang siap dicetak.
+- [Gambaran Umum](#-gambaran-umum)
+- [Fitur Utama](#-fitur-utama)
+- [Hak Akses Pengguna](#-hak-akses-pengguna)
+- [Arsitektur & Struktur Proyek](#-arsitektur--struktur-proyek)
+- [Teknologi & Dependensi](#-teknologi--dependensi)
+- [Panduan Instalasi](#-panduan-instalasi)
+- [Lisensi](#-lisensi)
 
-### 2. Dashboard Analitik dan Metrik Bisnis
-- Ringkasan indikator kinerja utama (KPI) harian:
-  - Total omzet / pendapatan harian.
-  - Jumlah transaksi yang berhasil diproses.
-  - Nilai rata-rata per transaksi (Average Ticket Size).
-  - Kuantitas item menu yang terjual.
-- Visualisasi grafik interaktif menggunakan fl_chart:
-  - Grafik batang tren pendapatan mingguan.
-  - Distribusi metode pembayaran.
+---
 
-### 3. Riwayat dan Audit Transaksi
+## 🎯 Gambaran Umum
+
+**WARDON POS** adalah aplikasi Point of Sale (POS) dan manajemen operasional untuk bisnis makanan dan minuman (F&B). Dibangun dengan **Flutter** dan **Riverpod**, aplikasi ini dirancang untuk memberikan kinerja tinggi, responsivitas lintas platform, serta kemudahan operasional kasir harian.
+
+Sistem ini menggabungkan:
+
+| | Kapabilitas |
+|---|---|
+| 🧾 | Pemrosesan transaksi yang cepat |
+| 📦 | Pelacakan inventaris stok menu |
+| 📊 | Visualisasi metrik performa penjualan |
+| 🏪 | Kustomisasi profil toko dan struk belanja |
+| 📑 | Pembuatan laporan pembukuan otomatis dalam format Microsoft Excel |
+
+---
+
+## ✨ Fitur Utama
+
+### 🛒 1. Transaksi Kasir (Point of Sale)
+
+- Antarmuka penjualan responsif, dioptimalkan untuk **mobile, tablet, dan desktop**.
+- Katalog menu berbasis kategori (*Kopi, Non-Kopi, Makanan, Camilan*) dengan **pencarian instan**.
+- Keranjang belanja dinamis dengan **catatan khusus per item** pesanan.
+- Dukungan beberapa metode pembayaran:
+
+  | Metode | Keterangan |
+  |---|---|
+  | 💵 Tunai | Kalkulasi otomatis uang diterima dan kembalian |
+  | 📱 QRIS | Pembayaran melalui kode QR |
+  | 🏦 Digital / Transfer | Pembayaran non-tunai lainnya |
+
+- Penghitungan **diskon** dan **Pajak Pertambahan Nilai (PPN)** terintegrasi.
+- Pembuatan dan pratinjau **struk digital** dengan format teks rapi, siap cetak.
+
+### 📊 2. Dashboard Analitik & Metrik Bisnis
+
+Ringkasan indikator kinerja utama (KPI) harian:
+
+| KPI | Deskripsi |
+|---|---|
+| **Total Omzet** | Pendapatan harian |
+| **Jumlah Transaksi** | Transaksi yang berhasil diproses |
+| **Average Ticket Size** | Nilai rata-rata per transaksi |
+| **Item Terjual** | Kuantitas item menu yang terjual |
+
+Visualisasi grafik interaktif menggunakan `fl_chart`:
+
+- Grafik batang tren pendapatan mingguan
+- Distribusi metode pembayaran
+
+### 🕘 3. Riwayat & Audit Transaksi
+
 - Pencatatan seluruh transaksi secara kronologis.
-- Pencarian dan filter transaksi berdasarkan nomor pesanan, nama kasir, atau nama pelanggan.
-- Kemampuan untuk meninjau detail rincian pesanan dan mencetak ulang struk transaksi.
+- Pencarian dan filter berdasarkan **nomor pesanan**, **nama kasir**, atau **nama pelanggan**.
+- Peninjauan detail pesanan dan **cetak ulang struk**.
 
-### 4. Manajemen Menu dan Inventaris (Admin)
-- Operasi CRUD (Tambah, Ubah, Hapus) untuk item menu dan penetapan harga jual.
+### 🍽️ 4. Manajemen Menu & Inventaris *(Admin)*
+
+- Operasi **CRUD** (tambah, ubah, hapus) item menu beserta penetapan harga jual.
 - Pengelompokan kategori produk.
-- Pemantauan dan penyesuaian ketersediaan stok produk secara berkala.
+- Pemantauan dan penyesuaian ketersediaan stok secara berkala.
 
-### 5. Laporan Penjualan dan Ekspor Excel (Admin)
-- Filter rentang waktu laporan: Hari Ini, Minggu Ini, Bulan Ini, Tahun Ini, dan Semua Periode.
-- Ekspor data transaksi ke dalam format spreadsheet (.xlsx) melalui mesin Syncfusion XlsIO:
-  - Lembar Ringkasan Eksekutif: Metrik agregat dan tanggal ekspor.
-  - Lembar Daftar Transaksi: Rincian komprehensif nomor pesanan, waktu, kasir, metode pembayaran, subtotal, diskon, dan total penerimaan.
-- Kemudahan pembagian berkas laporan langsung dari perangkat.
+### 📑 5. Laporan Penjualan & Ekspor Excel *(Admin)*
 
-### 6. Pengaturan Toko dan Personalisasi Sistem
-- Konfigurasi profil identitas usaha: nama toko, slogan, alamat, nomor kontak, dan catatan kaki pada struk belanja.
-- Pengaturan tarif pajak operasional dan opsi pengaktifan kalkulasi pajak.
-- Dukungan tema visual adaptif: Mode Terang (Light Mode) dan Mode Gelap (Dark Mode).
+- Filter rentang waktu: **Hari Ini · Minggu Ini · Bulan Ini · Tahun Ini · Semua Periode**.
+- Ekspor ke format **`.xlsx`** menggunakan mesin Syncfusion XlsIO, dengan dua lembar kerja:
+
+  | Lembar | Isi |
+  |---|---|
+  | **Ringkasan Eksekutif** | Metrik agregat dan tanggal ekspor |
+  | **Daftar Transaksi** | Nomor pesanan, waktu, kasir, metode pembayaran, subtotal, diskon, dan total penerimaan |
+
+- Berbagi berkas laporan langsung dari perangkat.
+
+### ⚙️ 6. Pengaturan Toko & Personalisasi
+
+- Konfigurasi profil usaha: **nama toko, slogan, alamat, nomor kontak**, dan **catatan kaki struk**.
+- Pengaturan tarif pajak operasional serta opsi aktif/nonaktif kalkulasi pajak.
+- Tema visual adaptif: **Light Mode** dan **Dark Mode**.
 
 ---
 
-## Arsitektur dan Struktur Proyek
+## 🔐 Hak Akses Pengguna
 
-Aplikasi dirancang dengan pendekatan modular berbasis fitur (feature-first approach) untuk menjaga skalabilitas dan keterbacaan kode:
+Sistem menerapkan **Role-Based Access Control (RBAC)** dengan dua tingkatan peran:
+
+| Modul | 👑 Administrator (Owner) | 🧑‍💼 Kasir |
+|---|:---:|:---:|
+| Transaksi Kasir | ✅ | ✅ |
+| Dashboard | ✅ | ✅ |
+| Riwayat Transaksi | ✅ | ✅ |
+| Manajemen Menu & Stok | ✅ | ❌ |
+| Laporan & Ekspor Excel | ✅ | ❌ |
+| Pengaturan Toko | ✅ | ❌ |
+
+> **Catatan:** Akses kasir ke menu stok dan laporan eksekutif dibatasi demi keamanan operasional.
+
+---
+
+## 🏗️ Arsitektur & Struktur Proyek
+
+Aplikasi menggunakan pendekatan modular **feature-first** untuk menjaga skalabilitas dan keterbacaan kode.
 
 ```text
 lib/
 ├── core/
-│   ├── constants/       # Data awal dan konstanta sistem
-│   ├── theme/           # Definisi tema Material 3 dan palet warna
-│   └── utils/           # Format mata uang (Rupiah), tanggal, dan waktu
+│   ├── constants/        # Data awal dan konstanta sistem
+│   ├── theme/            # Tema Material 3 dan palet warna
+│   └── utils/            # Format mata uang (Rupiah), tanggal, dan waktu
 ├── features/
-│   ├── auth/            # Halaman autentikasi dan login pengguna
-│   ├── dashboard/       # Tampilan dashboard performa dan grafik analitik
-│   ├── menu/            # Pengelolaan katalog produk dan stok inventaris
-│   ├── orders/          # Riwayat transaksi penjualan
-│   ├── pos/             # Antarmuka utama kasir dan keranjang transaksi
-│   ├── reports/         # Rekapitulasi laporan operasional dan ekspor Excel
-│   ├── settings/        # Konfigurasi profil usaha dan preferensi aplikasi
-│   └── main_layout.dart # Tata letak navigasi adaptif (Sidebar Desktop / Navigasi Bawah Mobile)
-├── models/              # Definisi model data (User, Menu, Order, StoreSettings)
-├── providers/           # State management berbasis Riverpod
-├── services/            # Layanan persistensi lokal, format struk, dan ekspor berkas
-└── main.dart            # Titik masuk utama aplikasi (Entry Point)
+│   ├── auth/             # Autentikasi dan login pengguna
+│   ├── dashboard/        # Dashboard performa dan grafik analitik
+│   ├── menu/             # Pengelolaan katalog produk dan stok inventaris
+│   ├── orders/           # Riwayat transaksi penjualan
+│   ├── pos/              # Antarmuka kasir dan keranjang transaksi
+│   ├── reports/          # Rekapitulasi laporan dan ekspor Excel
+│   ├── settings/         # Konfigurasi profil usaha dan preferensi aplikasi
+│   └── main_layout.dart  # Navigasi adaptif (Sidebar Desktop / Bottom Nav Mobile)
+├── models/               # Model data (User, Menu, Order, StoreSettings)
+├── providers/            # State management berbasis Riverpod
+├── services/             # Persistensi lokal, format struk, dan ekspor berkas
+└── main.dart             # Entry point aplikasi
 ```
 
 ---
 
-## Teknologi dan Dependensi
+## 🧰 Teknologi & Dependensi
 
-- Bahasa Pemrograman: Dart (SDK versi ^3.9.2)
-- Framework: Flutter (Material Design 3)
-- State Management: Flutter Riverpod (^3.3.2)
-- Navigasi: GoRouter (^17.2.3)
-- Penyimpanan Data Lokal: shared_preferences (^2.5.5)
-- Pengolahan Dokumen Excel: syncfusion_flutter_xlsio (^33.2.13)
-- Visualisasi Grafik: fl_chart (^1.2.0)
-- Tipografi: Google Fonts (^8.1.0)
-- Lokalisasi dan Format: intl (^0.20.3)
-- Utilitas Berkas dan Pembagian: path_provider (^2.1.5) dan share_plus (^12.0.2)
-
----
-
-## Hak Akses Pengguna
-
-Sistem menerapkan Role-Based Access Control (RBAC) dengan dua tingkatan peran:
-
-1. Administrator (Owner)
-   - Akses penuh ke seluruh modul sistem: Kasir, Dashboard, Riwayat Transaksi, Manajemen Menu & Stok, Laporan & Ekspor Excel, serta Pengaturan Toko.
-   
-2. Kasir
-   - Akses operasional harian: Modul Transaksi Kasir, Dashboard Ringkasan, dan Riwayat Transaksi. Akses ke menu stok dan laporan eksekutif dibatasi demi keamanan operasional.
+| Kategori | Teknologi | Versi |
+|---|---|---|
+| Bahasa | Dart | `^3.9.2` |
+| Framework | Flutter (Material Design 3) | `3.x` |
+| State Management | [flutter_riverpod](https://pub.dev/packages/flutter_riverpod) | `^3.3.2` |
+| Navigasi | [go_router](https://pub.dev/packages/go_router) | `^17.2.3` |
+| Penyimpanan Lokal | [shared_preferences](https://pub.dev/packages/shared_preferences) | `^2.5.5` |
+| Dokumen Excel | [syncfusion_flutter_xlsio](https://pub.dev/packages/syncfusion_flutter_xlsio) | `^33.2.13` |
+| Grafik | [fl_chart](https://pub.dev/packages/fl_chart) | `^1.2.0` |
+| Tipografi | [google_fonts](https://pub.dev/packages/google_fonts) | `^8.1.0` |
+| Lokalisasi & Format | [intl](https://pub.dev/packages/intl) | `^0.20.3` |
+| Berkas & Berbagi | [path_provider](https://pub.dev/packages/path_provider) · [share_plus](https://pub.dev/packages/share_plus) | `^2.1.5` · `^12.0.2` |
 
 ---
 
-## Panduan Instalasi dan Menjalankan Aplikasi
+## 🚀 Panduan Instalasi
 
 ### Prasyarat
-- Flutter SDK versi 3.x ke atas telah terpasang di sistem.
-- Perangkat lunak editor kode (VS Code, Android Studio, atau setara).
-- Perangkat target yang didukung: Windows Desktop, macOS, Linux, Web, Android, atau iOS.
 
-### Langkah-langkah
+- **Flutter SDK** versi 3.x atau lebih baru
+- Editor kode: VS Code, Android Studio, atau setara
+- Salah satu platform target: **Windows, macOS, Linux, Web, Android, atau iOS**
 
-1. Buka terminal pada direktori proyek:
-   ```bash
-   cd project-wardon
-   ```
+### Menjalankan Aplikasi
 
-2. Unduh seluruh dependensi yang diperlukan:
-   ```bash
-   flutter pub get
-   ```
+**1. Masuk ke direktori proyek**
 
-3. Jalankan aplikasi pada perangkat atau simulator yang aktif:
-   ```bash
-   flutter run
-   ```
+```bash
+cd project-wardon
+```
 
-4. Untuk membuat paket rilis (misalnya untuk sistem operasi Windows atau Android):
-   ```bash
-   # Windows Desktop
-   flutter build windows
+**2. Unduh dependensi**
 
-   # Android APK
-   flutter build apk --release
-   ```
+```bash
+flutter pub get
+```
+
+**3. Jalankan aplikasi** pada perangkat atau simulator yang aktif
+
+```bash
+flutter run
+```
+
+### Membuat Paket Rilis
+
+```bash
+# Windows Desktop
+flutter build windows
+
+# Android APK
+flutter build apk --release
+```
 
 ---
 
-## Lisensi dan Hak Cipta
+## 📄 Lisensi
 
-Hak Cipta (c) WARDON POS. Seluruh hak cipta dilindungi undang-undang.
+© **WARDON POS**. Seluruh hak cipta dilindungi undang-undang.
+
 Proyek ini dikembangkan untuk kebutuhan operasional manajemen kasir WARDON.
