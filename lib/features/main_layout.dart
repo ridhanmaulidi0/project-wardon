@@ -174,18 +174,103 @@ class _MainLayoutState extends ConsumerState<MainLayout> {
         ],
       ),
 
-      // Mobile Bottom Navigation Bar
+      // Mobile Floating Bottom Navigation Bar
       bottomNavigationBar: !isWide
-          ? NavigationBar(
-              selectedIndex: _currentIndex,
-              onDestinationSelected: (val) =>
-                  setState(() => _currentIndex = val),
-              destinations: navItems.map((item) {
-                return NavigationDestination(
-                  icon: Icon(item.icon),
-                  label: item.title,
-                );
-              }).toList(),
+          ? SafeArea(
+              top: false,
+              bottom: true,
+              child: Container(
+                height: 60,
+                margin: const EdgeInsets.fromLTRB(16, 0, 16, 10),
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.surfaceDark : Colors.white,
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(
+                    color: isDark
+                        ? AppColors.cardBorderDark
+                        : AppColors.cardBorderLight,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(
+                        alpha: isDark ? 0.35 : 0.08,
+                      ),
+                      blurRadius: 14,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: List.generate(navItems.length, (index) {
+                      final item = navItems[index];
+                      final isSelected = _currentIndex == index;
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 6,
+                        ),
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(16),
+                          onTap: () => setState(() => _currentIndex = index),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: isSelected ? 14 : 10,
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? (isDark
+                                        ? AppColors.primaryLight.withValues(
+                                            alpha: 0.2,
+                                          )
+                                        : AppColors.primary.withValues(
+                                            alpha: 0.12,
+                                          ))
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  item.icon,
+                                  size: 20,
+                                  color: isSelected
+                                      ? (isDark
+                                            ? AppColors.primaryLight
+                                            : AppColors.primary)
+                                      : (isDark
+                                            ? AppColors.textMutedDark
+                                            : AppColors.textMutedLight),
+                                ),
+                                if (isSelected) ...[
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    item.title,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: isDark
+                                          ? AppColors.primaryLight
+                                          : AppColors.primary,
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+              ),
             )
           : null,
     );
