@@ -1,4 +1,4 @@
-name: Manual Multiplatform Build & Release
+name: Build & Release (Android & Windows)
 
 on:
   workflow_dispatch:
@@ -14,7 +14,7 @@ on:
       release_tag:
         description: 'Tag versi rilis (kosongkan untuk penomoran otomatis)'
         type: string
-        default: 'v1.0.0'
+        default: 'v2.0.0'
         required: false
 
 permissions:
@@ -39,7 +39,7 @@ jobs:
         run: |
           RAW_TAG="${{ inputs.release_tag }}"
           if [ -z "$RAW_TAG" ]; then
-            RESOLVED_TAG="v1.0.0-build.${{ github.run_number }}"
+            RESOLVED_TAG="v2.0.0-build.${{ github.run_number }}"
           else
             RESOLVED_TAG="$RAW_TAG"
           fi
