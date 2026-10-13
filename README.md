@@ -10,7 +10,7 @@ Solusi kasir modern untuk warung kopi, kafe, dan eatery - cepat, responsif, dan 
 [![Dart](https://img.shields.io/badge/Dart-%5E3.9.2-0175C2?logo=dart&logoColor=white)](https://dart.dev)
 [![Riverpod](https://img.shields.io/badge/State-Riverpod%203-00B8D4)](https://riverpod.dev)
 [![Material 3](https://img.shields.io/badge/UI-Material%203-6750A4?logo=materialdesign&logoColor=white)](https://m3.material.io)
-[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web%20%7C%20Desktop-success)](#-panduan-instalasi)
+[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20Windows%20%7C%20Web-success)](#-panduan-instalasi)
 [![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-lightgrey)](#-lisensi)
 
 </div>
@@ -178,7 +178,7 @@ lib/
 
 - **Flutter SDK** versi 3.x atau lebih baru
 - Editor kode: VS Code, Android Studio, atau setara
-- Salah satu platform target: **Windows, macOS, Linux, Web, Android, atau iOS**
+- Salah satu platform target: **Windows, Android, Web, macOS, atau Linux**
 
 ### Menjalankan Aplikasi
 

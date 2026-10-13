@@ -23,5 +23,6 @@ class ThemeModeNotifier extends Notifier<ThemeMode> {
   bool get isDarkMode => state == ThemeMode.dark;
 }
 
-final themeModeProvider = NotifierProvider<ThemeModeNotifier, ThemeMode>(ThemeModeNotifier.new);
-
+final themeModeProvider = NotifierProvider<ThemeModeNotifier, ThemeMode>(
+  ThemeModeNotifier.new,
+);

@@ -20,4 +20,3 @@ class CurrencyFormatter {
     return format(amount);
   }
 }
-

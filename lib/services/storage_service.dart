@@ -22,7 +22,9 @@ class StorageService {
     }
     try {
       final list = jsonDecode(data) as List;
-      return list.map((e) => MenuItemModel.fromJson(e as Map<String, dynamic>)).toList();
+      return list
+          .map((e) => MenuItemModel.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (_) {
       return SampleData.defaultMenuItems;
     }
@@ -40,7 +42,9 @@ class StorageService {
     if (data == null) return [];
     try {
       final list = jsonDecode(data) as List;
-      return list.map((e) => OrderModel.fromJson(e as Map<String, dynamic>)).toList();
+      return list
+          .map((e) => OrderModel.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (_) {
       return [];
     }
@@ -57,7 +61,9 @@ class StorageService {
     final data = prefs.getString(_keySettings);
     if (data == null) return const StoreSettingsModel();
     try {
-      return StoreSettingsModel.fromJson(jsonDecode(data) as Map<String, dynamic>);
+      return StoreSettingsModel.fromJson(
+        jsonDecode(data) as Map<String, dynamic>,
+      );
     } catch (_) {
       return const StoreSettingsModel();
     }
@@ -98,4 +104,3 @@ class StorageService {
     await prefs.setBool(_keyTheme, isDark);
   }
 }
-

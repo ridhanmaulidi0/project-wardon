@@ -38,9 +38,7 @@ class _OrderHistoryScreenState extends ConsumerState<OrderHistoryScreen> {
     }).toList();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Riwayat Transaksi WARDON'),
-      ),
+      appBar: AppBar(title: const Text('Riwayat Transaksi WARDON')),
       body: Column(
         children: [
           Padding(
@@ -70,42 +68,77 @@ class _OrderHistoryScreenState extends ConsumerState<OrderHistoryScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.history_rounded, size: 54, color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
+                        Icon(
+                          Icons.history_rounded,
+                          size: 54,
+                          color: isDark
+                              ? AppColors.textMutedDark
+                              : AppColors.textMutedLight,
+                        ),
                         const SizedBox(height: 12),
                         const Text('Tidak ada riwayat transaksi ditemukan'),
                       ],
                     ),
                   )
                 : ListView.separated(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     itemCount: filtered.length,
                     separatorBuilder: (_, __) => const SizedBox(height: 8),
                     itemBuilder: (context, idx) {
                       final order = filtered[idx];
                       return Card(
                         child: ListTile(
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
                           leading: CircleAvatar(
-                            backgroundColor: (order.paymentMethod == PaymentMethod.tunai ? AppColors.info : AppColors.amberCoffee).withValues(alpha: 0.15),
+                            backgroundColor:
+                                (order.paymentMethod == PaymentMethod.tunai
+                                        ? AppColors.info
+                                        : AppColors.amberCoffee)
+                                    .withValues(alpha: 0.15),
                             child: Icon(
-                              order.paymentMethod == PaymentMethod.tunai ? Icons.money_rounded : Icons.qr_code_2_rounded,
-                              color: order.paymentMethod == PaymentMethod.tunai ? AppColors.info : AppColors.amberCoffee,
+                              order.paymentMethod == PaymentMethod.tunai
+                                  ? Icons.money_rounded
+                                  : Icons.qr_code_2_rounded,
+                              color: order.paymentMethod == PaymentMethod.tunai
+                                  ? AppColors.info
+                                  : AppColors.amberCoffee,
                               size: 20,
                             ),
                           ),
                           title: Row(
                             children: [
-                              Text(order.orderNumber, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                              Text(
+                                order.orderNumber,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                              ),
                               const SizedBox(width: 8),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 2,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: AppColors.success.withValues(alpha: 0.15),
+                                  color: AppColors.success.withValues(
+                                    alpha: 0.15,
+                                  ),
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: const Text(
                                   'LUNAS',
-                                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: AppColors.success),
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.success,
+                                  ),
                                 ),
                               ),
                             ],
@@ -114,7 +147,12 @@ class _OrderHistoryScreenState extends ConsumerState<OrderHistoryScreen> {
                             padding: const EdgeInsets.only(top: 4),
                             child: Text(
                               '${DateFormatter.formatFull(order.createdAt)} • Kasir: ${order.cashierName} • ${order.totalItems} item',
-                              style: TextStyle(fontSize: 12, color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: isDark
+                                    ? AppColors.textMutedDark
+                                    : AppColors.textMutedLight,
+                              ),
                             ),
                           ),
                           trailing: Row(
@@ -125,13 +163,18 @@ class _OrderHistoryScreenState extends ConsumerState<OrderHistoryScreen> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14,
-                                  color: isDark ? AppColors.primaryLight : AppColors.primary,
+                                  color: isDark
+                                      ? AppColors.primaryLight
+                                      : AppColors.primary,
                                 ),
                               ),
                               const SizedBox(width: 8),
                               IconButton(
                                 tooltip: 'Lihat / Cetak Struk',
-                                icon: const Icon(Icons.print_outlined, size: 20),
+                                icon: const Icon(
+                                  Icons.print_outlined,
+                                  size: 20,
+                                ),
                                 onPressed: () {
                                   showDialog(
                                     context: context,
@@ -151,4 +194,3 @@ class _OrderHistoryScreenState extends ConsumerState<OrderHistoryScreen> {
     );
   }
 }
-

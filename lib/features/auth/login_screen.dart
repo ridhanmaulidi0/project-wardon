@@ -40,7 +40,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             constraints: const BoxConstraints(maxWidth: 440),
             child: Card(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 40,
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -52,20 +55,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         color: AppColors.primary.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: isDark ? AppColors.primaryLight : AppColors.primary,
+                          color: isDark
+                              ? AppColors.primaryLight
+                              : AppColors.primary,
                           width: 2,
                         ),
                       ),
                       child: Icon(
                         Icons.coffee_rounded,
                         size: 38,
-                        color: isDark ? AppColors.primaryLight : AppColors.primary,
+                        color: isDark
+                            ? AppColors.primaryLight
+                            : AppColors.primary,
                       ),
                     ),
                     const SizedBox(height: 16),
                     Text(
                       'W A R D O N',
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(
                             fontWeight: FontWeight.w800,
                             letterSpacing: 3,
                           ),
@@ -74,8 +82,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     Text(
                       'Point of Sale • Warung Kopi & Eatery',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-                          ),
+                        color: isDark
+                            ? AppColors.textMutedDark
+                            : AppColors.textMutedLight,
+                      ),
                     ),
                     const SizedBox(height: 32),
 
@@ -83,8 +93,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     Text(
                       'Pilih Profil Masuk:',
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-                          ),
+                        color: isDark
+                            ? AppColors.textMutedDark
+                            : AppColors.textMutedLight,
+                      ),
                     ),
                     const SizedBox(height: 12),
                     Row(
@@ -95,21 +107,30 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             label: const Text('Admin / Owner'),
                             style: OutlinedButton.styleFrom(
                               padding: const EdgeInsets.symmetric(vertical: 14),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
-                            onPressed: () => _handleLogin(SampleData.defaultUsers.first),
+                            onPressed: () =>
+                                _handleLogin(SampleData.defaultUsers.first),
                           ),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
                           child: OutlinedButton.icon(
-                            icon: const Icon(Icons.point_of_sale_rounded, size: 18),
+                            icon: const Icon(
+                              Icons.point_of_sale_rounded,
+                              size: 18,
+                            ),
                             label: const Text('Kasir Shift'),
                             style: OutlinedButton.styleFrom(
                               padding: const EdgeInsets.symmetric(vertical: 14),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
-                            onPressed: () => _handleLogin(SampleData.defaultUsers.last),
+                            onPressed: () =>
+                                _handleLogin(SampleData.defaultUsers.last),
                           ),
                         ),
                       ],
@@ -122,7 +143,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           Expanded(child: Divider()),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12),
-                            child: Text('atau login manual', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                            child: Text(
+                              'atau login manual',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey,
+                              ),
+                            ),
                           ),
                           Expanded(child: Divider()),
                         ],
@@ -145,7 +172,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         labelText: 'Password',
                         prefixIcon: const Icon(Icons.lock_outline, size: 20),
                         suffixIcon: IconButton(
-                          icon: Icon(_obscure ? Icons.visibility_off : Icons.visibility, size: 20),
+                          icon: Icon(
+                            _obscure ? Icons.visibility_off : Icons.visibility,
+                            size: 20,
+                          ),
                           onPressed: () => setState(() => _obscure = !_obscure),
                         ),
                       ),
@@ -155,7 +185,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          ref.read(authProvider.notifier).loginWithCredentials(
+                          ref
+                              .read(authProvider.notifier)
+                              .loginWithCredentials(
                                 _emailCtrl.text,
                                 _passCtrl.text,
                               );
@@ -173,4 +205,3 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 }
-

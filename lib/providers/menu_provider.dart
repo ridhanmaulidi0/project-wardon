@@ -65,7 +65,10 @@ class MenuListNotifier extends Notifier<List<MenuItemModel>> {
   }
 }
 
-final menuListProvider = NotifierProvider<MenuListNotifier, List<MenuItemModel>>(MenuListNotifier.new);
+final menuListProvider =
+    NotifierProvider<MenuListNotifier, List<MenuItemModel>>(
+      MenuListNotifier.new,
+    );
 
 class SelectedCategoryNotifier extends Notifier<String> {
   @override
@@ -74,7 +77,10 @@ class SelectedCategoryNotifier extends Notifier<String> {
   void setCategory(String category) => state = category;
 }
 
-final selectedCategoryProvider = NotifierProvider<SelectedCategoryNotifier, String>(SelectedCategoryNotifier.new);
+final selectedCategoryProvider =
+    NotifierProvider<SelectedCategoryNotifier, String>(
+      SelectedCategoryNotifier.new,
+    );
 
 class SearchQueryNotifier extends Notifier<String> {
   @override
@@ -83,7 +89,9 @@ class SearchQueryNotifier extends Notifier<String> {
   void setQuery(String query) => state = query;
 }
 
-final searchQueryProvider = NotifierProvider<SearchQueryNotifier, String>(SearchQueryNotifier.new);
+final searchQueryProvider = NotifierProvider<SearchQueryNotifier, String>(
+  SearchQueryNotifier.new,
+);
 
 final filteredMenuProvider = Provider<List<MenuItemModel>>((ref) {
   final menuList = ref.watch(menuListProvider);
@@ -92,10 +100,11 @@ final filteredMenuProvider = Provider<List<MenuItemModel>>((ref) {
 
   return menuList.where((item) {
     final matchesCategory = category == 'all' || item.categoryId == category;
-    final matchesQuery = query.isEmpty ||
+    final matchesQuery =
+        query.isEmpty ||
         item.name.toLowerCase().contains(query) ||
-        (item.description != null && item.description!.toLowerCase().contains(query));
+        (item.description != null &&
+            item.description!.toLowerCase().contains(query));
     return matchesCategory && matchesQuery;
   }).toList();
 });
-

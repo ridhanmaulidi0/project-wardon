@@ -23,7 +23,9 @@ class _ReportScreenState extends ConsumerState<ReportScreen> {
 
     if (orders.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Tidak ada transaksi pada periode ini untuk diexport.')),
+        const SnackBar(
+          content: Text('Tidak ada transaksi pada periode ini untuk diexport.'),
+        ),
       );
       return;
     }
@@ -49,7 +51,10 @@ class _ReportScreenState extends ConsumerState<ReportScreen> {
         break;
     }
 
-    final filePath = await ExcelExportService.exportOrdersToExcel(orders, periodName: periodName);
+    final filePath = await ExcelExportService.exportOrdersToExcel(
+      orders,
+      periodName: periodName,
+    );
 
     setState(() => _isExporting = false);
 
@@ -88,9 +93,18 @@ class _ReportScreenState extends ConsumerState<ReportScreen> {
             padding: const EdgeInsets.only(right: 16),
             child: ElevatedButton.icon(
               icon: _isExporting
-                  ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    )
                   : const Icon(Icons.table_view_rounded, size: 18),
-              label: Text(_isExporting ? 'Mengekspor...' : 'Export ke Excel (.xlsx)'),
+              label: Text(
+                _isExporting ? 'Mengekspor...' : 'Export ke Excel (.xlsx)',
+              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.success,
                 foregroundColor: Colors.white,
@@ -129,14 +143,24 @@ class _ReportScreenState extends ConsumerState<ReportScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Total Penjualan', style: TextStyle(fontSize: 12, color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight)),
+                          Text(
+                            'Total Penjualan',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: isDark
+                                  ? AppColors.textMutedDark
+                                  : AppColors.textMutedLight,
+                            ),
+                          ),
                           const SizedBox(height: 6),
                           Text(
                             CurrencyFormatter.format(totalRevenue),
                             style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w800,
-                              color: isDark ? AppColors.primaryLight : AppColors.primary,
+                              color: isDark
+                                  ? AppColors.primaryLight
+                                  : AppColors.primary,
                             ),
                           ),
                         ],
@@ -152,9 +176,23 @@ class _ReportScreenState extends ConsumerState<ReportScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Jumlah Transaksi', style: TextStyle(fontSize: 12, color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight)),
+                          Text(
+                            'Jumlah Transaksi',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: isDark
+                                  ? AppColors.textMutedDark
+                                  : AppColors.textMutedLight,
+                            ),
+                          ),
                           const SizedBox(height: 6),
-                          Text('${orders.length} Order', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
+                          Text(
+                            '${orders.length} Order',
+                            style: const TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -168,9 +206,23 @@ class _ReportScreenState extends ConsumerState<ReportScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Total Item Terjual', style: TextStyle(fontSize: 12, color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight)),
+                          Text(
+                            'Total Item Terjual',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: isDark
+                                  ? AppColors.textMutedDark
+                                  : AppColors.textMutedLight,
+                            ),
+                          ),
                           const SizedBox(height: 6),
-                          Text('$totalItems Porsi', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
+                          Text(
+                            '$totalItems Porsi',
+                            style: const TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -190,15 +242,32 @@ class _ReportScreenState extends ConsumerState<ReportScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Daftar Transaksi Periode', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                        Text('${orders.length} rekaman data', style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                        const Text(
+                          'Daftar Transaksi Periode',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '${orders.length} rekaman data',
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey,
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 16),
                     if (orders.isEmpty)
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 40),
-                        child: Center(child: Text('Tidak ada data penjualan pada periode ini.', style: TextStyle(color: Colors.grey))),
+                        child: Center(
+                          child: Text(
+                            'Tidak ada data penjualan pada periode ini.',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
                       )
                     else
                       SingleChildScrollView(
@@ -206,27 +275,76 @@ class _ReportScreenState extends ConsumerState<ReportScreen> {
                         child: DataTable(
                           columnSpacing: 24,
                           headingRowColor: WidgetStatePropertyAll(
-                            isDark ? AppColors.surfaceDark : const Color(0xFFF1F5F9),
+                            isDark
+                                ? AppColors.surfaceDark
+                                : const Color(0xFFF1F5F9),
                           ),
                           columns: const [
-                            DataColumn(label: Text('No. Order', style: TextStyle(fontWeight: FontWeight.bold))),
-                            DataColumn(label: Text('Tanggal & Waktu', style: TextStyle(fontWeight: FontWeight.bold))),
-                            DataColumn(label: Text('Kasir', style: TextStyle(fontWeight: FontWeight.bold))),
-                            DataColumn(label: Text('Metode', style: TextStyle(fontWeight: FontWeight.bold))),
-                            DataColumn(label: Text('Item', style: TextStyle(fontWeight: FontWeight.bold))),
-                            DataColumn(label: Text('Total', style: TextStyle(fontWeight: FontWeight.bold))),
+                            DataColumn(
+                              label: Text(
+                                'No. Order',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Text(
+                                'Tanggal & Waktu',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Text(
+                                'Kasir',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Text(
+                                'Metode',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Text(
+                                'Item',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Text(
+                                'Total',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
                           ],
                           rows: orders.map((o) {
                             return DataRow(
                               cells: [
-                                DataCell(Text(o.orderNumber, style: const TextStyle(fontWeight: FontWeight.w600))),
-                                DataCell(Text(DateFormatter.formatFull(o.createdAt))),
+                                DataCell(
+                                  Text(
+                                    o.orderNumber,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                                DataCell(
+                                  Text(DateFormatter.formatFull(o.createdAt)),
+                                ),
                                 DataCell(Text(o.cashierName)),
                                 DataCell(
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 3,
+                                    ),
                                     decoration: BoxDecoration(
-                                      color: (o.paymentMethod == PaymentMethod.tunai ? AppColors.info : AppColors.amberCoffee).withValues(alpha: 0.15),
+                                      color:
+                                          (o.paymentMethod ==
+                                                      PaymentMethod.tunai
+                                                  ? AppColors.info
+                                                  : AppColors.amberCoffee)
+                                              .withValues(alpha: 0.15),
                                       borderRadius: BorderRadius.circular(6),
                                     ),
                                     child: Text(
@@ -234,13 +352,24 @@ class _ReportScreenState extends ConsumerState<ReportScreen> {
                                       style: TextStyle(
                                         fontSize: 11,
                                         fontWeight: FontWeight.bold,
-                                        color: o.paymentMethod == PaymentMethod.tunai ? AppColors.info : AppColors.amberCoffee,
+                                        color:
+                                            o.paymentMethod ==
+                                                PaymentMethod.tunai
+                                            ? AppColors.info
+                                            : AppColors.amberCoffee,
                                       ),
                                     ),
                                   ),
                                 ),
                                 DataCell(Text('${o.totalItems} item')),
-                                DataCell(Text(CurrencyFormatter.format(o.total), style: const TextStyle(fontWeight: FontWeight.bold))),
+                                DataCell(
+                                  Text(
+                                    CurrencyFormatter.format(o.total),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
                               ],
                             );
                           }).toList(),

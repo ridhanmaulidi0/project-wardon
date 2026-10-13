@@ -34,7 +34,8 @@ class SampleData {
       name: 'Es Kopi Susu Wardon',
       price: 18000,
       stock: 45,
-      description: 'Espresso blend khas Wardon dengan susu segar & gula aren organik',
+      description:
+          'Espresso blend khas Wardon dengan susu segar & gula aren organik',
     ),
     MenuItemModel(
       id: 'm_2',
@@ -140,4 +141,3 @@ class SampleData {
     ),
   ];
 }
-

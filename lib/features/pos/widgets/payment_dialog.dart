@@ -56,7 +56,9 @@ class _PaymentDialogState extends ConsumerState<PaymentDialog> {
       return;
     }
 
-    final newOrder = await ref.read(orderListProvider.notifier).completeCheckout(
+    final newOrder = await ref
+        .read(orderListProvider.notifier)
+        .completeCheckout(
           cashierName: cashierName,
           paymentMethod: _selectedMethod,
           cashReceived: _cashReceived,
@@ -109,10 +111,14 @@ class _PaymentDialogState extends ConsumerState<PaymentDialog> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: isDark ? 0.2 : 0.08),
+                  color: AppColors.primary.withValues(
+                    alpha: isDark ? 0.2 : 0.08,
+                  ),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: isDark ? AppColors.primaryLight.withValues(alpha: 0.3) : AppColors.primary.withValues(alpha: 0.2),
+                    color: isDark
+                        ? AppColors.primaryLight.withValues(alpha: 0.3)
+                        : AppColors.primary.withValues(alpha: 0.2),
                   ),
                 ),
                 child: Column(
@@ -122,7 +128,9 @@ class _PaymentDialogState extends ConsumerState<PaymentDialog> {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
-                        color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                        color: isDark
+                            ? AppColors.textMutedDark
+                            : AppColors.textMutedLight,
                       ),
                     ),
                     const SizedBox(height: 6),
@@ -131,7 +139,9 @@ class _PaymentDialogState extends ConsumerState<PaymentDialog> {
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.w800,
-                        color: isDark ? AppColors.primaryLight : AppColors.primary,
+                        color: isDark
+                            ? AppColors.primaryLight
+                            : AppColors.primary,
                       ),
                     ),
                   ],
@@ -147,7 +157,9 @@ class _PaymentDialogState extends ConsumerState<PaymentDialog> {
                       label: const Center(child: Text('Uang Tunai')),
                       selected: _selectedMethod == PaymentMethod.tunai,
                       onSelected: (val) {
-                        if (val) setState(() => _selectedMethod = PaymentMethod.tunai);
+                        if (val) {
+                          setState(() => _selectedMethod = PaymentMethod.tunai);
+                        }
                       },
                     ),
                   ),
@@ -157,7 +169,9 @@ class _PaymentDialogState extends ConsumerState<PaymentDialog> {
                       label: const Center(child: Text('QRIS / Digital')),
                       selected: _selectedMethod == PaymentMethod.qris,
                       onSelected: (val) {
-                        if (val) setState(() => _selectedMethod = PaymentMethod.qris);
+                        if (val) {
+                          setState(() => _selectedMethod = PaymentMethod.qris);
+                        }
                       },
                     ),
                   ),
@@ -209,21 +223,33 @@ class _PaymentDialogState extends ConsumerState<PaymentDialog> {
 
                 // Change Box
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
                   decoration: BoxDecoration(
-                    color: change > 0 ? AppColors.success.withValues(alpha: 0.1) : Colors.transparent,
+                    color: change > 0
+                        ? AppColors.success.withValues(alpha: 0.1)
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Kembalian:', style: TextStyle(fontWeight: FontWeight.w600)),
+                      const Text(
+                        'Kembalian:',
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
                       Text(
                         CurrencyFormatter.format(change),
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: change > 0 ? AppColors.success : (isDark ? AppColors.textLight : AppColors.textDark),
+                          color: change > 0
+                              ? AppColors.success
+                              : (isDark
+                                    ? AppColors.textLight
+                                    : AppColors.textDark),
                         ),
                       ),
                     ],
@@ -240,16 +266,28 @@ class _PaymentDialogState extends ConsumerState<PaymentDialog> {
                   ),
                   child: Column(
                     children: [
-                      const Icon(Icons.qr_code_2_rounded, size: 100, color: AppColors.primary),
+                      const Icon(
+                        Icons.qr_code_2_rounded,
+                        size: 100,
+                        color: AppColors.primary,
+                      ),
                       const SizedBox(height: 8),
                       const Text(
                         'QRIS WARDON POS',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Auto-detect via Payment Gateway Midtrans',
-                        style: TextStyle(fontSize: 11, color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: isDark
+                              ? AppColors.textMutedDark
+                              : AppColors.textMutedLight,
+                        ),
                       ),
                     ],
                   ),
@@ -259,7 +297,11 @@ class _PaymentDialogState extends ConsumerState<PaymentDialog> {
               const SizedBox(height: 24),
               ElevatedButton.icon(
                 icon: const Icon(Icons.check_circle_outline_rounded),
-                label: Text(_selectedMethod == PaymentMethod.tunai ? 'Selesaikan Pembayaran' : 'Verifikasi & Selesai'),
+                label: Text(
+                  _selectedMethod == PaymentMethod.tunai
+                      ? 'Selesaikan Pembayaran'
+                      : 'Verifikasi & Selesai',
+                ),
                 onPressed: _processPayment,
               ),
             ],
@@ -269,4 +311,3 @@ class _PaymentDialogState extends ConsumerState<PaymentDialog> {
     );
   }
 }
-

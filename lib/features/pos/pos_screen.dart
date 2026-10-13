@@ -51,13 +51,21 @@ class _PosScreenState extends ConsumerState<PosScreen> {
                           controller: _searchCtrl,
                           decoration: InputDecoration(
                             hintText: 'Cari kopi, makanan, camilan WARDON...',
-                            prefixIcon: const Icon(Icons.search_rounded, size: 20),
+                            prefixIcon: const Icon(
+                              Icons.search_rounded,
+                              size: 20,
+                            ),
                             suffixIcon: _searchCtrl.text.isNotEmpty
                                 ? IconButton(
-                                    icon: const Icon(Icons.clear_rounded, size: 18),
+                                    icon: const Icon(
+                                      Icons.clear_rounded,
+                                      size: 18,
+                                    ),
                                     onPressed: () {
                                       _searchCtrl.clear();
-                                      ref.read(searchQueryProvider.notifier).setQuery('');
+                                      ref
+                                          .read(searchQueryProvider.notifier)
+                                          .setQuery('');
                                       setState(() {});
                                     },
                                   )
@@ -65,7 +73,9 @@ class _PosScreenState extends ConsumerState<PosScreen> {
                             isDense: true,
                           ),
                           onChanged: (val) {
-                            ref.read(searchQueryProvider.notifier).setQuery(val);
+                            ref
+                                .read(searchQueryProvider.notifier)
+                                .setQuery(val);
                             setState(() {});
                           },
                         ),
@@ -91,7 +101,9 @@ class _PosScreenState extends ConsumerState<PosScreen> {
                         selected: isSelected,
                         onSelected: (val) {
                           if (val) {
-                            ref.read(selectedCategoryProvider.notifier).setCategory(cat.id);
+                            ref
+                                .read(selectedCategoryProvider.notifier)
+                                .setCategory(cat.id);
                           }
                         },
                       );
@@ -110,13 +122,17 @@ class _PosScreenState extends ConsumerState<PosScreen> {
                               Icon(
                                 Icons.search_off_rounded,
                                 size: 54,
-                                color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                                color: isDark
+                                    ? AppColors.textMutedDark
+                                    : AppColors.textMutedLight,
                               ),
                               const SizedBox(height: 12),
                               Text(
                                 'Tidak ada menu yang sesuai',
                                 style: TextStyle(
-                                  color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                                  color: isDark
+                                      ? AppColors.textMutedDark
+                                      : AppColors.textMutedLight,
                                   fontSize: 14,
                                 ),
                               ),
@@ -135,19 +151,22 @@ class _PosScreenState extends ConsumerState<PosScreen> {
 
                             return GridView.builder(
                               padding: const EdgeInsets.all(16),
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: crossAxisCount,
-                                crossAxisSpacing: 12,
-                                mainAxisSpacing: 12,
-                                childAspectRatio: 0.88,
-                              ),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: crossAxisCount,
+                                    crossAxisSpacing: 12,
+                                    mainAxisSpacing: 12,
+                                    childAspectRatio: 0.88,
+                                  ),
                               itemCount: filteredMenu.length,
                               itemBuilder: (context, index) {
                                 final item = filteredMenu[index];
                                 return MenuCard(
                                   item: item,
                                   onAddToCart: () {
-                                    ref.read(cartProvider.notifier).addItem(item);
+                                    ref
+                                        .read(cartProvider.notifier)
+                                        .addItem(item);
                                   },
                                 );
                               },
@@ -160,11 +179,7 @@ class _PosScreenState extends ConsumerState<PosScreen> {
           ),
 
           // Right: Cart Panel for Desktop / Tablet
-          if (isDesktop)
-            const SizedBox(
-              width: 380,
-              child: CartPanel(),
-            ),
+          if (isDesktop) const SizedBox(width: 380, child: CartPanel()),
         ],
       ),
 
@@ -192,7 +207,9 @@ class _PosScreenState extends ConsumerState<PosScreen> {
                         '${cart.totalQuantity} Item dalam Keranjang',
                         style: TextStyle(
                           fontSize: 11,
-                          color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                          color: isDark
+                              ? AppColors.textMutedDark
+                              : AppColors.textMutedLight,
                         ),
                       ),
                       Text(
@@ -200,7 +217,9 @@ class _PosScreenState extends ConsumerState<PosScreen> {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: isDark ? AppColors.primaryLight : AppColors.primary,
+                          color: isDark
+                              ? AppColors.primaryLight
+                              : AppColors.primary,
                         ),
                       ),
                     ],
@@ -214,10 +233,8 @@ class _PosScreenState extends ConsumerState<PosScreen> {
                         context: context,
                         isScrollControlled: true,
                         useSafeArea: true,
-                        builder: (_) => const SizedBox(
-                          height: 600,
-                          child: CartPanel(),
-                        ),
+                        builder: (_) =>
+                            const SizedBox(height: 600, child: CartPanel()),
                       );
                     },
                   ),

@@ -30,9 +30,18 @@ class ReceiptDialog extends ConsumerWidget {
                 children: [
                   const Row(
                     children: [
-                      Icon(Icons.receipt_long_rounded, color: AppColors.primary),
+                      Icon(
+                        Icons.receipt_long_rounded,
+                        color: AppColors.primary,
+                      ),
                       SizedBox(width: 8),
-                      Text('Struk Pembayaran', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      Text(
+                        'Struk Pembayaran',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                   IconButton(
@@ -47,9 +56,15 @@ class ReceiptDialog extends ConsumerWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: isDark ? const Color(0xFF0D1117) : const Color(0xFFF1F5F9),
+                    color: isDark
+                        ? const Color(0xFF0D1117)
+                        : const Color(0xFFF1F5F9),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: isDark ? AppColors.cardBorderDark : AppColors.cardBorderLight),
+                    border: Border.all(
+                      color: isDark
+                          ? AppColors.cardBorderDark
+                          : AppColors.cardBorderLight,
+                    ),
                   ),
                   child: SingleChildScrollView(
                     child: SelectableText(
@@ -74,7 +89,11 @@ class ReceiptDialog extends ConsumerWidget {
                       onPressed: () {
                         Clipboard.setData(ClipboardData(text: receiptText));
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Struk berhasil disalin ke clipboard!')),
+                          const SnackBar(
+                            content: Text(
+                              'Struk berhasil disalin ke clipboard!',
+                            ),
+                          ),
                         );
                       },
                     ),
@@ -87,7 +106,9 @@ class ReceiptDialog extends ConsumerWidget {
                       onPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Mencetak struk #${order.orderNumber} ke Printer Thermal Bluetooth/USB...'),
+                            content: Text(
+                              'Mencetak struk #${order.orderNumber} ke Printer Thermal Bluetooth/USB...',
+                            ),
                             backgroundColor: AppColors.success,
                           ),
                         );
@@ -108,4 +129,3 @@ class ReceiptDialog extends ConsumerWidget {
     );
   }
 }
-

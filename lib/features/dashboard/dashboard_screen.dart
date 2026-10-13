@@ -15,19 +15,23 @@ class DashboardScreen extends ConsumerWidget {
     final now = DateTime.now();
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    final todayOrders = allOrders.where((o) =>
-        o.createdAt.year == now.year &&
-        o.createdAt.month == now.month &&
-        o.createdAt.day == now.day).toList();
+    final todayOrders = allOrders
+        .where(
+          (o) =>
+              o.createdAt.year == now.year &&
+              o.createdAt.month == now.month &&
+              o.createdAt.day == now.day,
+        )
+        .toList();
 
     final todayRevenue = todayOrders.fold<int>(0, (sum, o) => sum + o.total);
     final todayItems = todayOrders.fold<int>(0, (sum, o) => sum + o.totalItems);
-    final avgTicket = todayOrders.isEmpty ? 0 : (todayRevenue / todayOrders.length).round();
+    final avgTicket = todayOrders.isEmpty
+        ? 0
+        : (todayRevenue / todayOrders.length).round();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Dashboard Ringkasan WARDON'),
-      ),
+      appBar: AppBar(title: const Text('Dashboard Ringkasan WARDON')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -101,13 +105,22 @@ class DashboardScreen extends ConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
                                     'Tren Penjualan 7 Hari Terakhir',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
                                   ),
-                                  Icon(Icons.show_chart_rounded, color: isDark ? AppColors.primaryLight : AppColors.primary),
+                                  Icon(
+                                    Icons.show_chart_rounded,
+                                    color: isDark
+                                        ? AppColors.primaryLight
+                                        : AppColors.primary,
+                                  ),
                                 ],
                               ),
                               const SizedBox(height: 24),
@@ -120,7 +133,10 @@ class DashboardScreen extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    if (isDesktop) const SizedBox(width: 16) else const SizedBox(height: 16),
+                    if (isDesktop)
+                      const SizedBox(width: 16)
+                    else
+                      const SizedBox(height: 16),
 
                     // Top Selling Items
                     Expanded(
@@ -133,40 +149,65 @@ class DashboardScreen extends ConsumerWidget {
                             children: [
                               const Text(
                                 'Menu Paling Laris',
-                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
                               ),
                               const SizedBox(height: 16),
                               Consumer(
                                 builder: (context, ref, _) {
-                                  final topItems = ref.watch(topSellingItemsProvider);
+                                  final topItems = ref.watch(
+                                    topSellingItemsProvider,
+                                  );
                                   if (topItems.isEmpty) {
                                     return const Padding(
-                                      padding: EdgeInsets.symmetric(vertical: 40),
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 40,
+                                      ),
                                       child: Center(
-                                        child: Text('Belum ada transaksi tercatat', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                                        child: Text(
+                                          'Belum ada transaksi tercatat',
+                                          style: TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 12,
+                                          ),
+                                        ),
                                       ),
                                     );
                                   }
 
                                   return ListView.separated(
                                     shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     itemCount: topItems.take(5).length,
-                                    separatorBuilder: (_, __) => const Divider(height: 12),
+                                    separatorBuilder: (_, __) =>
+                                        const Divider(height: 12),
                                     itemBuilder: (context, idx) {
                                       final item = topItems[idx];
                                       return Row(
                                         children: [
                                           CircleAvatar(
                                             radius: 12,
-                                            backgroundColor: AppColors.primary.withValues(alpha: 0.15),
-                                            child: Text('${idx + 1}', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                                            backgroundColor: AppColors.primary
+                                                .withValues(alpha: 0.15),
+                                            child: Text(
+                                              '${idx + 1}',
+                                              style: const TextStyle(
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                           ),
                                           const SizedBox(width: 10),
                                           Expanded(
                                             child: Text(
                                               item.name,
-                                              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                                              style: const TextStyle(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
@@ -175,7 +216,9 @@ class DashboardScreen extends ConsumerWidget {
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 13,
-                                              color: isDark ? AppColors.primaryLight : AppColors.primary,
+                                              color: isDark
+                                                  ? AppColors.primaryLight
+                                                  : AppColors.primary,
                                             ),
                                           ),
                                         ],
@@ -202,12 +245,23 @@ class DashboardScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Transaksi Terbaru', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                    const Text(
+                      'Transaksi Terbaru',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
                     const SizedBox(height: 12),
                     if (allOrders.isEmpty)
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 30),
-                        child: Center(child: Text('Belum ada riwayat pesanan', style: TextStyle(color: Colors.grey))),
+                        child: Center(
+                          child: Text(
+                            'Belum ada riwayat pesanan',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
                       )
                     else
                       ListView.separated(
@@ -225,16 +279,30 @@ class DashboardScreen extends ConsumerWidget {
                                 color: AppColors.primary.withValues(alpha: 0.1),
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(Icons.receipt_rounded, size: 20, color: AppColors.primary),
+                              child: const Icon(
+                                Icons.receipt_rounded,
+                                size: 20,
+                                color: AppColors.primary,
+                              ),
                             ),
-                            title: Text(o.orderNumber, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                            subtitle: Text('${DateFormatter.formatFull(o.createdAt)} • ${o.cashierName}'),
+                            title: Text(
+                              o.orderNumber,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13,
+                              ),
+                            ),
+                            subtitle: Text(
+                              '${DateFormatter.formatFull(o.createdAt)} • ${o.cashierName}',
+                            ),
                             trailing: Text(
                               CurrencyFormatter.format(o.total),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
-                                color: isDark ? AppColors.primaryLight : AppColors.primary,
+                                color: isDark
+                                    ? AppColors.primaryLight
+                                    : AppColors.primary,
                               ),
                             ),
                           );
@@ -272,7 +340,9 @@ class DashboardScreen extends ConsumerWidget {
                   title,
                   style: TextStyle(
                     fontSize: 12,
-                    color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                    color: isDark
+                        ? AppColors.textMutedDark
+                        : AppColors.textMutedLight,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -315,16 +385,25 @@ class DashboardScreen extends ConsumerWidget {
                 if (idx >= 0 && idx < days.length) {
                   return Padding(
                     padding: const EdgeInsets.only(top: 6),
-                    child: Text(days[idx], style: const TextStyle(fontSize: 10, color: Colors.grey)),
+                    child: Text(
+                      days[idx],
+                      style: const TextStyle(fontSize: 10, color: Colors.grey),
+                    ),
                   );
                 }
                 return const SizedBox();
               },
             ),
           ),
-          leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          leftTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          topTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          rightTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
         ),
         gridData: const FlGridData(show: false),
         borderData: FlBorderData(show: false),
@@ -355,4 +434,3 @@ class DashboardScreen extends ConsumerWidget {
     );
   }
 }
-

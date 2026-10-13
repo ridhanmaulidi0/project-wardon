@@ -7,11 +7,7 @@ class MenuCard extends StatelessWidget {
   final MenuItemModel item;
   final VoidCallback onAddToCart;
 
-  const MenuCard({
-    super.key,
-    required this.item,
-    required this.onAddToCart,
-  });
+  const MenuCard({super.key, required this.item, required this.onAddToCart});
 
   IconData _getCategoryIcon(String cat) {
     switch (cat) {
@@ -51,23 +47,30 @@ class MenuCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withValues(alpha: isDark ? 0.25 : 0.08),
+                      color: AppColors.primary.withValues(
+                        alpha: isDark ? 0.25 : 0.08,
+                      ),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Icon(
                       _getCategoryIcon(item.categoryId),
                       size: 20,
-                      color: isDark ? AppColors.primaryLight : AppColors.primary,
+                      color: isDark
+                          ? AppColors.primaryLight
+                          : AppColors.primary,
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: isOutOfStock
                           ? AppColors.error.withValues(alpha: 0.15)
                           : isLowStock
-                              ? AppColors.warning.withValues(alpha: 0.15)
-                              : AppColors.success.withValues(alpha: 0.15),
+                          ? AppColors.warning.withValues(alpha: 0.15)
+                          : AppColors.success.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
@@ -78,8 +81,8 @@ class MenuCard extends StatelessWidget {
                         color: isOutOfStock
                             ? AppColors.error
                             : isLowStock
-                                ? AppColors.warning
-                                : AppColors.success,
+                            ? AppColors.warning
+                            : AppColors.success,
                       ),
                     ),
                   ),
@@ -109,7 +112,9 @@ class MenuCard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: isDark ? AppColors.primaryLight : AppColors.amberCoffee,
+                      color: isDark
+                          ? AppColors.primaryLight
+                          : AppColors.amberCoffee,
                     ),
                   ),
                   Container(
@@ -118,7 +123,9 @@ class MenuCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: isOutOfStock
                           ? Colors.grey.withValues(alpha: 0.2)
-                          : (isDark ? AppColors.primaryLight : AppColors.primary),
+                          : (isDark
+                                ? AppColors.primaryLight
+                                : AppColors.primary),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
@@ -138,4 +145,3 @@ class MenuCard extends StatelessWidget {
     );
   }
 }
-

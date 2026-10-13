@@ -80,7 +80,8 @@ class _MainLayoutState extends ConsumerState<MainLayout> {
               minExtendedWidth: 190,
               backgroundColor: isDark ? AppColors.surfaceDark : Colors.white,
               selectedIndex: _currentIndex,
-              onDestinationSelected: (val) => setState(() => _currentIndex = val),
+              onDestinationSelected: (val) =>
+                  setState(() => _currentIndex = val),
               leading: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Row(
@@ -94,7 +95,9 @@ class _MainLayoutState extends ConsumerState<MainLayout> {
                       ),
                       child: Icon(
                         Icons.coffee_rounded,
-                        color: isDark ? AppColors.primaryLight : AppColors.primary,
+                        color: isDark
+                            ? AppColors.primaryLight
+                            : AppColors.primary,
                         size: 24,
                       ),
                     ),
@@ -105,14 +108,20 @@ class _MainLayoutState extends ConsumerState<MainLayout> {
                         children: [
                           const Text(
                             'WARDON',
-                            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16, letterSpacing: 1.5),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              fontSize: 16,
+                              letterSpacing: 1.5,
+                            ),
                           ),
                           Text(
                             user?.role.name.toUpperCase() ?? 'KASIR',
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
-                              color: isDark ? AppColors.primaryLight : AppColors.primary,
+                              color: isDark
+                                  ? AppColors.primaryLight
+                                  : AppColors.primary,
                             ),
                           ),
                         ],
@@ -128,8 +137,13 @@ class _MainLayoutState extends ConsumerState<MainLayout> {
                     padding: const EdgeInsets.only(bottom: 16),
                     child: IconButton(
                       tooltip: isDark ? 'Mode Terang' : 'Mode Gelap',
-                      icon: Icon(isDark ? Icons.light_mode_rounded : Icons.dark_mode_rounded),
-                      onPressed: () => ref.read(themeModeProvider.notifier).toggleTheme(),
+                      icon: Icon(
+                        isDark
+                            ? Icons.light_mode_rounded
+                            : Icons.dark_mode_rounded,
+                      ),
+                      onPressed: () =>
+                          ref.read(themeModeProvider.notifier).toggleTheme(),
                     ),
                   ),
                 ),
@@ -137,7 +151,10 @@ class _MainLayoutState extends ConsumerState<MainLayout> {
               destinations: navItems.map((item) {
                 return NavigationRailDestination(
                   icon: Icon(item.icon),
-                  selectedIcon: Icon(item.icon, color: isDark ? AppColors.primaryLight : AppColors.primary),
+                  selectedIcon: Icon(
+                    item.icon,
+                    color: isDark ? AppColors.primaryLight : AppColors.primary,
+                  ),
                   label: Text(item.title),
                 );
               }).toList(),
@@ -147,13 +164,13 @@ class _MainLayoutState extends ConsumerState<MainLayout> {
             VerticalDivider(
               width: 1,
               thickness: 1,
-              color: isDark ? AppColors.cardBorderDark : AppColors.cardBorderLight,
+              color: isDark
+                  ? AppColors.cardBorderDark
+                  : AppColors.cardBorderLight,
             ),
 
           // Main View Content
-          Expanded(
-            child: navItems[_currentIndex].screen,
-          ),
+          Expanded(child: navItems[_currentIndex].screen),
         ],
       ),
 
@@ -161,7 +178,8 @@ class _MainLayoutState extends ConsumerState<MainLayout> {
       bottomNavigationBar: !isWide
           ? NavigationBar(
               selectedIndex: _currentIndex,
-              onDestinationSelected: (val) => setState(() => _currentIndex = val),
+              onDestinationSelected: (val) =>
+                  setState(() => _currentIndex = val),
               destinations: navItems.map((item) {
                 return NavigationDestination(
                   icon: Icon(item.icon),
@@ -185,4 +203,3 @@ class _NavItem {
     required this.screen,
   });
 }
-

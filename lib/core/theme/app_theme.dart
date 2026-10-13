@@ -13,7 +13,9 @@ class AppTheme {
       error: AppColors.error,
     ),
     scaffoldBackgroundColor: AppColors.bgLight,
-    textTheme: GoogleFonts.plusJakartaSansTextTheme(ThemeData.light().textTheme),
+    textTheme: GoogleFonts.plusJakartaSansTextTheme(
+      ThemeData.light().textTheme,
+    ),
     cardTheme: CardThemeData(
       color: AppColors.surfaceLight,
       elevation: 0,
@@ -127,4 +129,3 @@ class AppTheme {
     ),
   );
 }
-

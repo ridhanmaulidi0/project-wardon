@@ -32,19 +32,18 @@ class OrderItemModel {
   }
 
   Map<String, dynamic> toJson() => {
-        'menuItemId': menuItemId,
-        'name': name,
-        'unitPrice': unitPrice,
-        'quantity': quantity,
-        'notes': notes,
-      };
+    'menuItemId': menuItemId,
+    'name': name,
+    'unitPrice': unitPrice,
+    'quantity': quantity,
+    'notes': notes,
+  };
 
   factory OrderItemModel.fromJson(Map<String, dynamic> json) => OrderItemModel(
-        menuItemId: json['menuItemId'] as String,
-        name: json['name'] as String,
-        unitPrice: (json['unitPrice'] as num).toInt(),
-        quantity: (json['quantity'] as num).toInt(),
-        notes: json['notes'] as String?,
-      );
+    menuItemId: json['menuItemId'] as String,
+    name: json['name'] as String,
+    unitPrice: (json['unitPrice'] as num).toInt(),
+    quantity: (json['quantity'] as num).toInt(),
+    notes: json['notes'] as String?,
+  );
 }
-

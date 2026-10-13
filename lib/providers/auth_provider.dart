@@ -40,5 +40,6 @@ class AuthNotifier extends Notifier<UserModel?> {
   }
 }
 
-final authProvider = NotifierProvider<AuthNotifier, UserModel?>(AuthNotifier.new);
-
+final authProvider = NotifierProvider<AuthNotifier, UserModel?>(
+  AuthNotifier.new,
+);

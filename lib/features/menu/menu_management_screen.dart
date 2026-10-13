@@ -10,10 +10,18 @@ import '../../providers/menu_provider.dart';
 class MenuManagementScreen extends ConsumerWidget {
   const MenuManagementScreen({super.key});
 
-  void _showFormDialog(BuildContext context, WidgetRef ref, [MenuItemModel? existing]) {
+  void _showFormDialog(
+    BuildContext context,
+    WidgetRef ref, [
+    MenuItemModel? existing,
+  ]) {
     final nameCtrl = TextEditingController(text: existing?.name ?? '');
-    final priceCtrl = TextEditingController(text: existing?.price.toString() ?? '');
-    final stockCtrl = TextEditingController(text: existing?.stock.toString() ?? '50');
+    final priceCtrl = TextEditingController(
+      text: existing?.price.toString() ?? '',
+    );
+    final stockCtrl = TextEditingController(
+      text: existing?.stock.toString() ?? '50',
+    );
     final descCtrl = TextEditingController(text: existing?.description ?? '');
     String selectedCat = existing?.categoryId ?? 'kopi';
 
@@ -21,7 +29,9 @@ class MenuManagementScreen extends ConsumerWidget {
       context: context,
       builder: (_) => StatefulBuilder(
         builder: (context, setState) => AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
           title: Text(existing == null ? 'Tambah Menu WARDON' : 'Edit Menu'),
           content: SingleChildScrollView(
             child: Column(
@@ -30,7 +40,9 @@ class MenuManagementScreen extends ConsumerWidget {
               children: [
                 TextField(
                   controller: nameCtrl,
-                  decoration: const InputDecoration(labelText: 'Nama Menu (contoh: Es Kopi Susu)'),
+                  decoration: const InputDecoration(
+                    labelText: 'Nama Menu (contoh: Es Kopi Susu)',
+                  ),
                 ),
                 const SizedBox(height: 12),
                 DropdownButtonFormField<String>(
@@ -38,7 +50,10 @@ class MenuManagementScreen extends ConsumerWidget {
                   decoration: const InputDecoration(labelText: 'Kategori'),
                   items: SampleData.defaultCategories
                       .where((c) => c.id != 'all')
-                      .map((c) => DropdownMenuItem(value: c.id, child: Text(c.name)))
+                      .map(
+                        (c) =>
+                            DropdownMenuItem(value: c.id, child: Text(c.name)),
+                      )
                       .toList(),
                   onChanged: (val) {
                     if (val != null) setState(() => selectedCat = val);
@@ -51,7 +66,10 @@ class MenuManagementScreen extends ConsumerWidget {
                       child: TextField(
                         controller: priceCtrl,
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(labelText: 'Harga', prefixText: 'Rp '),
+                        decoration: const InputDecoration(
+                          labelText: 'Harga',
+                          prefixText: 'Rp ',
+                        ),
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -59,7 +77,9 @@ class MenuManagementScreen extends ConsumerWidget {
                       child: TextField(
                         controller: stockCtrl,
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(labelText: 'Stok (Porsi)'),
+                        decoration: const InputDecoration(
+                          labelText: 'Stok (Porsi)',
+                        ),
                       ),
                     ),
                   ],
@@ -67,13 +87,18 @@ class MenuManagementScreen extends ConsumerWidget {
                 const SizedBox(height: 12),
                 TextField(
                   controller: descCtrl,
-                  decoration: const InputDecoration(labelText: 'Deskripsi singkat (opsional)'),
+                  decoration: const InputDecoration(
+                    labelText: 'Deskripsi singkat (opsional)',
+                  ),
                 ),
               ],
             ),
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Batal')),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Batal'),
+            ),
             ElevatedButton(
               onPressed: () {
                 final name = nameCtrl.text.trim();
@@ -82,7 +107,9 @@ class MenuManagementScreen extends ConsumerWidget {
 
                 if (name.isEmpty || price <= 0) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Nama dan harga valid wajib diisi!')),
+                    const SnackBar(
+                      content: Text('Nama dan harga valid wajib diisi!'),
+                    ),
                   );
                   return;
                 }
@@ -118,7 +145,11 @@ class MenuManagementScreen extends ConsumerWidget {
     );
   }
 
-  void _showStockDialog(BuildContext context, WidgetRef ref, MenuItemModel item) {
+  void _showStockDialog(
+    BuildContext context,
+    WidgetRef ref,
+    MenuItemModel item,
+  ) {
     final ctrl = TextEditingController(text: item.stock.toString());
     showDialog(
       context: context,
@@ -130,11 +161,16 @@ class MenuManagementScreen extends ConsumerWidget {
           decoration: const InputDecoration(labelText: 'Jumlah Porsi Tersedia'),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Batal')),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Batal'),
+          ),
           ElevatedButton(
             onPressed: () {
               final newStock = int.tryParse(ctrl.text) ?? item.stock;
-              ref.read(menuListProvider.notifier).updateStock(item.id, newStock);
+              ref
+                  .read(menuListProvider.notifier)
+                  .updateStock(item.id, newStock);
               Navigator.pop(context);
             },
             child: const Text('Update Stok'),
@@ -159,7 +195,9 @@ class MenuManagementScreen extends ConsumerWidget {
             onPressed: () {
               ref.read(menuListProvider.notifier).resetToDefault();
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Menu direset ke daftar default WARDON.')),
+                const SnackBar(
+                  content: Text('Menu direset ke daftar default WARDON.'),
+                ),
               );
             },
           ),
@@ -185,30 +223,52 @@ class MenuManagementScreen extends ConsumerWidget {
 
                 return Card(
                   child: ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     leading: Container(
                       width: 44,
                       height: 44,
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withValues(alpha: isDark ? 0.25 : 0.08),
+                        color: AppColors.primary.withValues(
+                          alpha: isDark ? 0.25 : 0.08,
+                        ),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Icon(
                         Icons.coffee_rounded,
-                        color: isDark ? AppColors.primaryLight : AppColors.primary,
+                        color: isDark
+                            ? AppColors.primaryLight
+                            : AppColors.primary,
                       ),
                     ),
                     title: Row(
                       children: [
-                        Text(item.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                        Text(
+                          item.name,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
                         const SizedBox(width: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.grey.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(6),
                           ),
-                          child: Text(item.categoryId.toUpperCase(), style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+                          child: Text(
+                            item.categoryId.toUpperCase(),
+                            style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -216,7 +276,12 @@ class MenuManagementScreen extends ConsumerWidget {
                       padding: const EdgeInsets.only(top: 4),
                       child: Text(
                         '${CurrencyFormatter.format(item.price)} • ${item.description ?? "Tanpa deskripsi"}',
-                        style: TextStyle(fontSize: 12, color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: isDark
+                              ? AppColors.textMutedDark
+                              : AppColors.textMutedLight,
+                        ),
                       ),
                     ),
                     trailing: Row(
@@ -226,21 +291,36 @@ class MenuManagementScreen extends ConsumerWidget {
                           onTap: () => _showStockDialog(context, ref, item),
                           borderRadius: BorderRadius.circular(8),
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 6,
+                            ),
                             decoration: BoxDecoration(
-                              color: (isOutOfStock ? AppColors.error : AppColors.success).withValues(alpha: 0.12),
+                              color:
+                                  (isOutOfStock
+                                          ? AppColors.error
+                                          : AppColors.success)
+                                      .withValues(alpha: 0.12),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Row(
                               children: [
-                                Icon(Icons.inventory_2_outlined, size: 14, color: isOutOfStock ? AppColors.error : AppColors.success),
+                                Icon(
+                                  Icons.inventory_2_outlined,
+                                  size: 14,
+                                  color: isOutOfStock
+                                      ? AppColors.error
+                                      : AppColors.success,
+                                ),
                                 const SizedBox(width: 4),
                                 Text(
                                   '${item.stock} porsi',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 12,
-                                    color: isOutOfStock ? AppColors.error : AppColors.success,
+                                    color: isOutOfStock
+                                        ? AppColors.error
+                                        : AppColors.success,
                                   ),
                                 ),
                               ],
@@ -253,9 +333,15 @@ class MenuManagementScreen extends ConsumerWidget {
                           onPressed: () => _showFormDialog(context, ref, item),
                         ),
                         IconButton(
-                          icon: const Icon(Icons.delete_outline, size: 18, color: AppColors.error),
+                          icon: const Icon(
+                            Icons.delete_outline,
+                            size: 18,
+                            color: AppColors.error,
+                          ),
                           onPressed: () {
-                            ref.read(menuListProvider.notifier).deleteItem(item.id);
+                            ref
+                                .read(menuListProvider.notifier)
+                                .deleteItem(item.id);
                           },
                         ),
                       ],

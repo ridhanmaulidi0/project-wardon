@@ -11,11 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting('id_ID', null);
 
-  runApp(
-    const ProviderScope(
-      child: WardonPosApp(),
-    ),
-  );
+  runApp(const ProviderScope(child: WardonPosApp()));
 }
 
 class WardonPosApp extends ConsumerWidget {

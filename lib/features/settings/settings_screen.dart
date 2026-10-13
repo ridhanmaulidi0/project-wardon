@@ -62,9 +62,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final isDark = themeMode == ThemeMode.dark;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pengaturan WARDON POS'),
-      ),
+      appBar: AppBar(title: const Text('Pengaturan WARDON POS')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: ConstrainedBox(
@@ -80,10 +78,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     children: [
                       CircleAvatar(
                         radius: 26,
-                        backgroundColor: AppColors.primary.withValues(alpha: 0.15),
+                        backgroundColor: AppColors.primary.withValues(
+                          alpha: 0.15,
+                        ),
                         child: Icon(
-                          user?.isAdmin == true ? Icons.shield_rounded : Icons.person_rounded,
-                          color: isDark ? AppColors.primaryLight : AppColors.primary,
+                          user?.isAdmin == true
+                              ? Icons.shield_rounded
+                              : Icons.person_rounded,
+                          color: isDark
+                              ? AppColors.primaryLight
+                              : AppColors.primary,
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -91,11 +95,22 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(user?.name ?? 'Pengguna', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                            Text(
+                              user?.name ?? 'Pengguna',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
                             const SizedBox(height: 2),
                             Text(
                               'Role: ${user?.role.name.toUpperCase()} • ${user?.email}',
-                              style: TextStyle(fontSize: 12, color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: isDark
+                                    ? AppColors.textMutedDark
+                                    : AppColors.textMutedLight,
+                              ),
                             ),
                           ],
                         ),
@@ -103,7 +118,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       OutlinedButton.icon(
                         icon: const Icon(Icons.logout_rounded, size: 16),
                         label: const Text('Keluar'),
-                        onPressed: () => ref.read(authProvider.notifier).logout(),
+                        onPressed: () =>
+                            ref.read(authProvider.notifier).logout(),
                       ),
                     ],
                   ),
@@ -120,15 +136,33 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     children: [
                       Row(
                         children: [
-                          Icon(isDark ? Icons.dark_mode_rounded : Icons.light_mode_rounded, color: AppColors.amberCoffee),
+                          Icon(
+                            isDark
+                                ? Icons.dark_mode_rounded
+                                : Icons.light_mode_rounded,
+                            color: AppColors.amberCoffee,
+                          ),
                           const SizedBox(width: 12),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Tema Tampilan', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                              const Text(
+                                'Tema Tampilan',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                              ),
                               Text(
-                                isDark ? 'Mode Gelap (Dark Mode)' : 'Mode Terang (Light Mode)',
-                                style: TextStyle(fontSize: 12, color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
+                                isDark
+                                    ? 'Mode Gelap (Dark Mode)'
+                                    : 'Mode Terang (Light Mode)',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: isDark
+                                      ? AppColors.textMutedDark
+                                      : AppColors.textMutedLight,
+                                ),
                               ),
                             ],
                           ),
@@ -136,7 +170,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                       Switch(
                         value: isDark,
-                        onChanged: (_) => ref.read(themeModeProvider.notifier).toggleTheme(),
+                        onChanged: (_) =>
+                            ref.read(themeModeProvider.notifier).toggleTheme(),
                       ),
                     ],
                   ),
@@ -153,30 +188,47 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     children: [
                       const Row(
                         children: [
-                          Icon(Icons.storefront_rounded, color: AppColors.primary),
+                          Icon(
+                            Icons.storefront_rounded,
+                            color: AppColors.primary,
+                          ),
                           SizedBox(width: 8),
-                          Text('Profil & Struk Warung Kopi', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                          Text(
+                            'Profil & Struk Warung Kopi',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 16),
                       TextField(
                         controller: _nameCtrl,
-                        decoration: const InputDecoration(labelText: 'Nama Toko'),
+                        decoration: const InputDecoration(
+                          labelText: 'Nama Toko',
+                        ),
                       ),
                       const SizedBox(height: 12),
                       TextField(
                         controller: _taglineCtrl,
-                        decoration: const InputDecoration(labelText: 'Tagline / Slogan'),
+                        decoration: const InputDecoration(
+                          labelText: 'Tagline / Slogan',
+                        ),
                       ),
                       const SizedBox(height: 12),
                       TextField(
                         controller: _addressCtrl,
-                        decoration: const InputDecoration(labelText: 'Alamat Toko (muncul di struk)'),
+                        decoration: const InputDecoration(
+                          labelText: 'Alamat Toko (muncul di struk)',
+                        ),
                       ),
                       const SizedBox(height: 12),
                       TextField(
                         controller: _phoneCtrl,
-                        decoration: const InputDecoration(labelText: 'Nomor Telepon / WhatsApp'),
+                        decoration: const InputDecoration(
+                          labelText: 'Nomor Telepon / WhatsApp',
+                        ),
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton.icon(
@@ -197,20 +249,50 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Integrasi Hardware & Payment Gateway', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                      const Text(
+                        'Integrasi Hardware & Payment Gateway',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
                       const SizedBox(height: 12),
                       ListTile(
                         contentPadding: EdgeInsets.zero,
-                        leading: const Icon(Icons.print_rounded, color: AppColors.success),
-                        title: const Text('Printer Thermal (Bluetooth / USB)', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                        subtitle: const Text('Siap mencetak kertas 58mm / 80mm', style: TextStyle(fontSize: 11)),
+                        leading: const Icon(
+                          Icons.print_rounded,
+                          color: AppColors.success,
+                        ),
+                        title: const Text(
+                          'Printer Thermal (Bluetooth / USB)',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        subtitle: const Text(
+                          'Siap mencetak kertas 58mm / 80mm',
+                          style: TextStyle(fontSize: 11),
+                        ),
                       ),
                       const Divider(height: 1),
                       ListTile(
                         contentPadding: EdgeInsets.zero,
-                        leading: const Icon(Icons.credit_card_rounded, color: AppColors.info),
-                        title: const Text('Midtrans Payment Gateway (QRIS / GoPay / Transfer)', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                        subtitle: const Text('Status: Siap dihubungkan dengan Client Key', style: TextStyle(fontSize: 11)),
+                        leading: const Icon(
+                          Icons.credit_card_rounded,
+                          color: AppColors.info,
+                        ),
+                        title: const Text(
+                          'Midtrans Payment Gateway (QRIS / GoPay / Transfer)',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        subtitle: const Text(
+                          'Status: Siap dihubungkan dengan Client Key',
+                          style: TextStyle(fontSize: 11),
+                        ),
                       ),
                     ],
                   ),

@@ -20,5 +20,7 @@ class StoreSettingsNotifier extends Notifier<StoreSettingsModel> {
   }
 }
 
-final storeSettingsProvider = NotifierProvider<StoreSettingsNotifier, StoreSettingsModel>(StoreSettingsNotifier.new);
-
+final storeSettingsProvider =
+    NotifierProvider<StoreSettingsNotifier, StoreSettingsModel>(
+      StoreSettingsNotifier.new,
+    );

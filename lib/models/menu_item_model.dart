@@ -44,25 +44,24 @@ class MenuItemModel {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'categoryId': categoryId,
-        'name': name,
-        'price': price,
-        'stock': stock,
-        'imageUrl': imageUrl,
-        'description': description,
-        'isAvailable': isAvailable,
-      };
+    'id': id,
+    'categoryId': categoryId,
+    'name': name,
+    'price': price,
+    'stock': stock,
+    'imageUrl': imageUrl,
+    'description': description,
+    'isAvailable': isAvailable,
+  };
 
   factory MenuItemModel.fromJson(Map<String, dynamic> json) => MenuItemModel(
-        id: json['id'] as String,
-        categoryId: json['categoryId'] as String,
-        name: json['name'] as String,
-        price: (json['price'] as num).toInt(),
-        stock: (json['stock'] as num).toInt(),
-        imageUrl: json['imageUrl'] as String?,
-        description: json['description'] as String?,
-        isAvailable: json['isAvailable'] as bool? ?? true,
-      );
+    id: json['id'] as String,
+    categoryId: json['categoryId'] as String,
+    name: json['name'] as String,
+    price: (json['price'] as num).toInt(),
+    stock: (json['stock'] as num).toInt(),
+    imageUrl: json['imageUrl'] as String?,
+    description: json['description'] as String?,
+    isAvailable: json['isAvailable'] as bool? ?? true,
+  );
 }
-

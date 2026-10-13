@@ -6,7 +6,10 @@ import 'package:syncfusion_flutter_xlsio/xlsio.dart' as xls;
 import '../models/order_model.dart';
 
 class ExcelExportService {
-  static Future<String?> exportOrdersToExcel(List<OrderModel> orders, {String periodName = 'Semua'}) async {
+  static Future<String?> exportOrdersToExcel(
+    List<OrderModel> orders, {
+    String periodName = 'Semua',
+  }) async {
     try {
       final workbook = xls.Workbook();
 
@@ -15,16 +18,22 @@ class ExcelExportService {
       summarySheet.name = 'Ringkasan';
 
       summarySheet.getRangeByName('A1:D1').merge();
-      summarySheet.getRangeByName('A1').setText('LAPORAN PENJUALAN WARDON - $periodName');
+      summarySheet
+          .getRangeByName('A1')
+          .setText('LAPORAN PENJUALAN WARDON - $periodName');
       summarySheet.getRangeByName('A1').cellStyle.bold = true;
       summarySheet.getRangeByName('A1').cellStyle.fontSize = 14;
 
       final totalRevenue = orders.fold<int>(0, (sum, o) => sum + o.total);
       final totalQty = orders.fold<int>(0, (sum, o) => sum + o.totalItems);
-      final avgTicket = orders.isEmpty ? 0 : (totalRevenue / orders.length).round();
+      final avgTicket = orders.isEmpty
+          ? 0
+          : (totalRevenue / orders.length).round();
 
       summarySheet.getRangeByName('A3').setText('Waktu Export:');
-      summarySheet.getRangeByName('B3').setText(DateFormat('dd MMMM yyyy HH:mm').format(DateTime.now()));
+      summarySheet
+          .getRangeByName('B3')
+          .setText(DateFormat('dd MMMM yyyy HH:mm').format(DateTime.now()));
 
       summarySheet.getRangeByName('A4').setText('Total Transaksi:');
       summarySheet.getRangeByName('B4').setNumber(orders.length.toDouble());
@@ -43,7 +52,17 @@ class ExcelExportService {
       // ================= SHEET 2: DAFTAR TRANSAKSI =================
       final transSheet = workbook.worksheets.addWithName('Daftar Transaksi');
 
-      final headers = ['No Order', 'Tanggal & Jam', 'Kasir', 'Metode Bayar', 'Status', 'Jml Item', 'Subtotal', 'Diskon', 'Total'];
+      final headers = [
+        'No Order',
+        'Tanggal & Jam',
+        'Kasir',
+        'Metode Bayar',
+        'Status',
+        'Jml Item',
+        'Subtotal',
+        'Diskon',
+        'Total',
+      ];
       for (int i = 0; i < headers.length; i++) {
         final cell = transSheet.getRangeByIndex(1, i + 1);
         cell.setText(headers[i]);
@@ -55,11 +74,19 @@ class ExcelExportService {
       int rowIndex = 2;
       for (final order in orders) {
         transSheet.getRangeByIndex(rowIndex, 1).setText(order.orderNumber);
-        transSheet.getRangeByIndex(rowIndex, 2).setText(DateFormat('yyyy-MM-dd HH:mm').format(order.createdAt));
+        transSheet
+            .getRangeByIndex(rowIndex, 2)
+            .setText(DateFormat('yyyy-MM-dd HH:mm').format(order.createdAt));
         transSheet.getRangeByIndex(rowIndex, 3).setText(order.cashierName);
-        transSheet.getRangeByIndex(rowIndex, 4).setText(order.paymentMethod.name.toUpperCase());
-        transSheet.getRangeByIndex(rowIndex, 5).setText(order.paymentStatus.toUpperCase());
-        transSheet.getRangeByIndex(rowIndex, 6).setNumber(order.totalItems.toDouble());
+        transSheet
+            .getRangeByIndex(rowIndex, 4)
+            .setText(order.paymentMethod.name.toUpperCase());
+        transSheet
+            .getRangeByIndex(rowIndex, 5)
+            .setText(order.paymentStatus.toUpperCase());
+        transSheet
+            .getRangeByIndex(rowIndex, 6)
+            .setNumber(order.totalItems.toDouble());
 
         final subtotalCell = transSheet.getRangeByIndex(rowIndex, 7);
         subtotalCell.setNumber(order.subtotal.toDouble());
@@ -78,7 +105,14 @@ class ExcelExportService {
 
       // ================= SHEET 3: RINCIAN ITEM =================
       final itemSheet = workbook.worksheets.addWithName('Rincian Item');
-      final itemHeaders = ['No Order', 'Nama Item', 'Harga Satuan', 'Qty', 'Subtotal Item', 'Catatan'];
+      final itemHeaders = [
+        'No Order',
+        'Nama Item',
+        'Harga Satuan',
+        'Qty',
+        'Subtotal Item',
+        'Catatan',
+      ];
       for (int i = 0; i < itemHeaders.length; i++) {
         final cell = itemSheet.getRangeByIndex(1, i + 1);
         cell.setText(itemHeaders[i]);
@@ -97,7 +131,9 @@ class ExcelExportService {
           priceCell.setNumber(item.unitPrice.toDouble());
           priceCell.numberFormat = 'Rp #,##0';
 
-          itemSheet.getRangeByIndex(itemRow, 4).setNumber(item.quantity.toDouble());
+          itemSheet
+              .getRangeByIndex(itemRow, 4)
+              .setNumber(item.quantity.toDouble());
 
           final itemSubtotalCell = itemSheet.getRangeByIndex(itemRow, 5);
           itemSubtotalCell.setNumber(item.subtotal.toDouble());
@@ -121,7 +157,13 @@ class ExcelExportService {
       // Trigger Share Dialog
       await SharePlus.instance.share(
         ShareParams(
-          files: [XFile(file.path, mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')],
+          files: [
+            XFile(
+              file.path,
+              mimeType:
+                  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            ),
+          ],
           text: 'Laporan Penjualan WARDON ($periodName)',
         ),
       );

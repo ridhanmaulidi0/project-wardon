@@ -3,7 +3,10 @@ import '../models/order_model.dart';
 import '../models/store_settings_model.dart';
 
 class ReceiptService {
-  static String generateReceiptText(OrderModel order, StoreSettingsModel settings) {
+  static String generateReceiptText(
+    OrderModel order,
+    StoreSettingsModel settings,
+  ) {
     final buffer = StringBuffer();
     const divider = '================================';
     const subDivider = '--------------------------------';
@@ -16,7 +19,9 @@ class ReceiptService {
     buffer.writeln(divider);
 
     buffer.writeln('No. Order : ${order.orderNumber}');
-    buffer.writeln('Waktu     : ${DateFormat('dd/MM/yyyy HH:mm').format(order.createdAt)}');
+    buffer.writeln(
+      'Waktu     : ${DateFormat('dd/MM/yyyy HH:mm').format(order.createdAt)}',
+    );
     buffer.writeln('Kasir     : ${order.cashierName}');
     if (order.customerName != null && order.customerName!.isNotEmpty) {
       buffer.writeln('Pelanggan : ${order.customerName}');
@@ -36,7 +41,9 @@ class ReceiptService {
     buffer.writeln(subDivider);
     buffer.writeln(justifyText('Subtotal:', formatRp(order.subtotal), 32));
     if (order.discount > 0) {
-      buffer.writeln(justifyText('Diskon:', '-${formatRp(order.discount)}', 32));
+      buffer.writeln(
+        justifyText('Diskon:', '-${formatRp(order.discount)}', 32),
+      );
     }
     if (order.tax > 0) {
       buffer.writeln(justifyText('Pajak (PPN):', formatRp(order.tax), 32));
@@ -47,7 +54,9 @@ class ReceiptService {
 
     buffer.writeln('Metode Bayar: ${order.paymentMethod.name.toUpperCase()}');
     if (order.paymentMethod == PaymentMethod.tunai) {
-      buffer.writeln(justifyText('Tunai Diterima:', formatRp(order.cashReceived), 32));
+      buffer.writeln(
+        justifyText('Tunai Diterima:', formatRp(order.cashReceived), 32),
+      );
       buffer.writeln(justifyText('Kembalian:', formatRp(order.change), 32));
     } else {
       buffer.writeln('Status: LUNAS (QRIS / Digital)');
@@ -74,8 +83,11 @@ class ReceiptService {
   }
 
   static String formatRp(num value) {
-    final formatter = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0);
+    final formatter = NumberFormat.currency(
+      locale: 'id_ID',
+      symbol: 'Rp ',
+      decimalDigits: 0,
+    );
     return formatter.format(value);
   }
 }
-

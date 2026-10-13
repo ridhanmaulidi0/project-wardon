@@ -93,7 +93,9 @@ class CartNotifier extends Notifier<CartState> {
   }
 
   void removeItem(String menuItemId) {
-    final updatedList = state.items.where((e) => e.menuItemId != menuItemId).toList();
+    final updatedList = state.items
+        .where((e) => e.menuItemId != menuItemId)
+        .toList();
     state = state.copyWith(items: updatedList);
   }
 
@@ -123,5 +125,6 @@ class CartNotifier extends Notifier<CartState> {
   }
 }
 
-final cartProvider = NotifierProvider<CartNotifier, CartState>(CartNotifier.new);
-
+final cartProvider = NotifierProvider<CartNotifier, CartState>(
+  CartNotifier.new,
+);
