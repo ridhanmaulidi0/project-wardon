@@ -5,7 +5,7 @@
 </p>
 
 <div align="center">
-  <img src="https://img.shields.io/static/v1?label=Platform&message=Android%20%7C%20Windows%20%7C%20Web&color=059669&style=for-the-badge&logo=android&logoColor=white&labelColor=0f172a" alt="Platform" />
+  <img src="https://img.shields.io/static/v1?label=Platform&message=Android%20%7C%20Windows&color=059669&style=for-the-badge&logo=android&logoColor=white&labelColor=0f172a" alt="Platform" />
   <img src="https://img.shields.io/static/v1?label=Framework&message=Flutter%203.x&color=02569B&style=for-the-badge&logo=flutter&logoColor=white&labelColor=0f172a" alt="Framework" />
   <img src="https://img.shields.io/static/v1?label=Application%20ID&message=com.wardon.edonsky&color=6366f1&style=for-the-badge&logo=android&logoColor=white&labelColor=0f172a" alt="Application ID" />
   <img src="https://img.shields.io/static/v1?label=State&message=Riverpod%203&color=7c3aed&style=for-the-badge&logo=dart&logoColor=white&labelColor=0f172a" alt="State" />
@@ -15,7 +15,7 @@
 
 <br/>
 
-**WARDON POS** adalah sistem Point of Sale (POS) & manajemen operasional terintegrasi untuk bisnis F&B (warung kopi, kafe, dan eatery) - cepat, responsif, dan mudah digunakan di Android, Windows Desktop, dan Web.
+**WARDON POS** adalah sistem Point of Sale (POS) & manajemen operasional terintegrasi untuk bisnis F&B (warung kopi, kafe, dan eatery) - cepat, responsif, dan mudah digunakan di Android dan Windows Desktop.
 
 ---
 
@@ -181,7 +181,7 @@ lib/
 
 - **Flutter SDK** versi 3.x atau lebih baru
 - Editor kode: VS Code, Android Studio, atau setara
-- Salah satu platform target: **Windows, Android, Web, macOS, atau Linux**
+- Platform target: **Android** atau **Windows Desktop**
 
 ### Menjalankan Aplikasi
 
@@ -220,7 +220,7 @@ flutter build apk --release
 ### v2.0.0
 - **Penggantian Application ID**: Diperbarui menjadi `com.wardon.edonsky` (sebelumnya `com.wardon.wardon_pos`).
 - **Icon Aplikasi Baru**: Integrasi icon launcher Android HD (`mdpi`, `hdpi`, `xhdpi`, `xxhdpi`, `xxxhdpi`) dan master asset `assets/icon/app_icon.jpg` bersumber dari repositori `phantek-video-toolkit`.
-- **Optimalisasi Multiplatform & Penghapusan iOS**: Menghapus seluruh dependensi dan berkas platform iOS secara menyeluruh untuk efisiensi serta performa optimal di Android, Windows Desktop, dan Web.
+- **Optimalisasi Khusus Android & Windows**: Menghapus seluruh dependensi dan berkas platform non-target (iOS, Web, macOS, Linux) secara menyeluruh untuk efisiensi serta performa maksimal di Android dan Windows Desktop.
 - **Pembersihan & Standardisasi Kode**: Kode 100% lolos pengujian dan verifikasi `flutter analyze` (0 issues), mengikuti aturan `flutter_lints` dan kaidah format resmi Dart.
 - **Pembaruan Tampilan Dokumentasi**: Header baru dengan master icon melengkung berbayang dan badge bergaya `for-the-badge`.
 
