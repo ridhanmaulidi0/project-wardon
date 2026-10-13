@@ -1,4 +1,4 @@
-package com.wardon.wardon_pos
+package com.wardon.edonsky
 
 import io.flutter.embedding.android.FlutterActivity
 

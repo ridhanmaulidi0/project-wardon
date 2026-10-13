@@ -1,19 +1,21 @@
-<div align="center">
-
 # ☕ WARDON POS
 
-**Sistem Point of Sale & Manajemen Operasional Terintegrasi untuk Bisnis F&B**
+<p align="center">
+  <img src="assets/icon/app_icon.jpg" alt="WARDON POS Icon" width="120" style="border-radius: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.25);" />
+</p>
 
-Solusi kasir modern untuk warung kopi, kafe, dan eatery - cepat, responsif, dan mudah digunakan di semua perangkat.
-
-[![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/Dart-%5E3.9.2-0175C2?logo=dart&logoColor=white)](https://dart.dev)
-[![Riverpod](https://img.shields.io/badge/State-Riverpod%203-00B8D4)](https://riverpod.dev)
-[![Material 3](https://img.shields.io/badge/UI-Material%203-6750A4?logo=materialdesign&logoColor=white)](https://m3.material.io)
-[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20Windows%20%7C%20Web-success)](#-panduan-instalasi)
-[![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-lightgrey)](#-lisensi)
-
+<div align="center">
+  <img src="https://img.shields.io/static/v1?label=Platform&message=Android%20%7C%20Windows%20%7C%20Web&color=059669&style=for-the-badge&logo=android&logoColor=white&labelColor=0f172a" alt="Platform" />
+  <img src="https://img.shields.io/static/v1?label=Framework&message=Flutter%203.x&color=02569B&style=for-the-badge&logo=flutter&logoColor=white&labelColor=0f172a" alt="Framework" />
+  <img src="https://img.shields.io/static/v1?label=Application%20ID&message=com.wardon.edonsky&color=6366f1&style=for-the-badge&logo=android&logoColor=white&labelColor=0f172a" alt="Application ID" />
+  <img src="https://img.shields.io/static/v1?label=State&message=Riverpod%203&color=7c3aed&style=for-the-badge&logo=dart&logoColor=white&labelColor=0f172a" alt="State" />
+  <img src="https://img.shields.io/static/v1?label=Version&message=v2.0.0&color=2563eb&style=for-the-badge&logo=github&logoColor=white&labelColor=0f172a" alt="Version" />
+  <a href="LICENSE"><img src="https://img.shields.io/static/v1?label=License&message=GPLv3&color=475569&style=for-the-badge&logo=gnu&logoColor=white&labelColor=0f172a" alt="License" /></a>
 </div>
+
+<br/>
+
+**WARDON POS** adalah sistem Point of Sale (POS) & manajemen operasional terintegrasi untuk bisnis F&B (warung kopi, kafe, dan eatery) - cepat, responsif, dan mudah digunakan di Android, Windows Desktop, dan Web.
 
 ---
 
@@ -25,6 +27,7 @@ Solusi kasir modern untuk warung kopi, kafe, dan eatery - cepat, responsif, dan 
 - [Arsitektur & Struktur Proyek](#-arsitektur--struktur-proyek)
 - [Teknologi & Dependensi](#-teknologi--dependensi)
 - [Panduan Instalasi](#-panduan-instalasi)
+- [Catatan Rilis (Changelog)](#-catatan-rilis-changelog)
 - [Lisensi](#-lisensi)
 
 ---
@@ -212,8 +215,17 @@ flutter build apk --release
 
 ---
 
+## 🚀 Catatan Rilis (Changelog)
+
+### v2.0.0
+- **Penggantian Application ID**: Diperbarui menjadi `com.wardon.edonsky` (sebelumnya `com.wardon.wardon_pos`).
+- **Icon Aplikasi Baru**: Integrasi icon launcher Android HD (`mdpi`, `hdpi`, `xhdpi`, `xxhdpi`, `xxxhdpi`) dan master asset `assets/icon/app_icon.jpg` bersumber dari repositori `phantek-video-toolkit`.
+- **Optimalisasi Multiplatform & Penghapusan iOS**: Menghapus seluruh dependensi dan berkas platform iOS secara menyeluruh untuk efisiensi serta performa optimal di Android, Windows Desktop, dan Web.
+- **Pembersihan & Standardisasi Kode**: Kode 100% lolos pengujian dan verifikasi `flutter analyze` (0 issues), mengikuti aturan `flutter_lints` dan kaidah format resmi Dart.
+- **Pembaruan Tampilan Dokumentasi**: Header baru dengan master icon melengkung berbayang dan badge bergaya `for-the-badge`.
+
+---
+
 ## 📄 Lisensi
 
-© **WARDON POS**. Seluruh hak cipta dilindungi undang-undang.
-
-Proyek ini dikembangkan untuk kebutuhan operasional manajemen kasir WARDON.
+Didistribusikan di bawah lisensi **GNU General Public License v3.0 (GPLv3)**. Lihat berkas [`LICENSE`](LICENSE) untuk informasi lisensi selengkapnya.
