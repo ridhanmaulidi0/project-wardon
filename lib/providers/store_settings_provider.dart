@@ -18,6 +18,14 @@ class StoreSettingsNotifier extends Notifier<StoreSettingsModel> {
     state = newSettings;
     await StorageService.saveSettings(newSettings);
   }
+
+  Future<void> updateQrisImagePath(String? path) async {
+    final updated = state.copyWith(
+      qrisImagePath: path,
+      clearQrisImage: path == null,
+    );
+    await updateSettings(updated);
+  }
 }
 
 final storeSettingsProvider =

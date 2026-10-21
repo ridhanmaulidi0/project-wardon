@@ -6,6 +6,7 @@ class StoreSettingsModel {
   final String receiptFooter;
   final bool enableTax;
   final double taxRate;
+  final String? qrisImagePath;
 
   const StoreSettingsModel({
     this.storeName = 'WARDON',
@@ -16,6 +17,7 @@ class StoreSettingsModel {
         'Terima kasih atas kunjungan Anda!\nNikmati hari Anda bersama WARDON ☕',
     this.enableTax = false,
     this.taxRate = 0.11,
+    this.qrisImagePath,
   });
 
   StoreSettingsModel copyWith({
@@ -26,6 +28,8 @@ class StoreSettingsModel {
     String? receiptFooter,
     bool? enableTax,
     double? taxRate,
+    String? qrisImagePath,
+    bool clearQrisImage = false,
   }) {
     return StoreSettingsModel(
       storeName: storeName ?? this.storeName,
@@ -35,6 +39,9 @@ class StoreSettingsModel {
       receiptFooter: receiptFooter ?? this.receiptFooter,
       enableTax: enableTax ?? this.enableTax,
       taxRate: taxRate ?? this.taxRate,
+      qrisImagePath: clearQrisImage
+          ? null
+          : (qrisImagePath ?? this.qrisImagePath),
     );
   }
 
@@ -46,6 +53,7 @@ class StoreSettingsModel {
     'receiptFooter': receiptFooter,
     'enableTax': enableTax,
     'taxRate': taxRate,
+    'qrisImagePath': qrisImagePath,
   };
 
   factory StoreSettingsModel.fromJson(
@@ -60,5 +68,6 @@ class StoreSettingsModel {
         'Terima kasih atas kunjungan Anda!\nNikmati hari Anda bersama WARDON ☕',
     enableTax: json['enableTax'] as bool? ?? false,
     taxRate: (json['taxRate'] as num?)?.toDouble() ?? 0.11,
+    qrisImagePath: json['qrisImagePath'] as String?,
   );
 }
